@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JeebookReader", "Reader\JeebookReader.csproj", "{CDDFA358-DB83-48C2-B202-293BF0DBFABB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reader", "Reader\Reader.csproj", "{CDDFA358-DB83-48C2-B202-293BF0DBFABB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JeebookToy", "Toy\JeebookToy.csproj", "{E593D1E4-11B3-413A-83A2-29CFD854EFB8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toy", "Toy\Toy.csproj", "{E593D1E4-11B3-413A-83A2-29CFD854EFB8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
