@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Jeebook.Base;
 
-namespace JeebookReader
+namespace Jeebook.Reader
 {
     class ComicView : System.Windows.Forms.PictureBox
     {
+
+        public ComicView(Book book, Proxy proxy)
+        {
+        }
 
         private void InitializeComponent()
         {
@@ -20,5 +25,6 @@ namespace JeebookReader
             this.ResumeLayout(false);
 
         }
+
     }
 }
