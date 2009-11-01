@@ -51,6 +51,9 @@
     <Compile Include="ComicView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ComicView.Designer.cs">
+      <DependentUpon>ComicView.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
