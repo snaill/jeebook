@@ -52,7 +52,7 @@
     <Compile Include="Element.cs" />
     <Compile Include="FileProxy.cs" />
     <Compile Include="HttpProxy.cs" />
-    <Compile Include="Image.cs" />
+    <Compile Include="ImageObject.cs" />
     <Compile Include="Info.cs" />
     <Compile Include="Link.cs" />
     <Compile Include="MediaObject.cs" />

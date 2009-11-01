@@ -7,30 +7,37 @@
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
 using System;
+using System.Linq;
+using System.Xml.Linq;
 
 namespace Jeebook.Base
 {
 	/// <summary>
-	/// Description of Image.
+    /// Description of ImageObject.
 	/// </summary>
-	public class Image
+	public class ImageObject
 	{
-		public Image()
-		{
-		}
-		
-		public string Fileref { get; set; }
-		
+        public static ImageObject Create(XElement xe)
+        {
+            ImageObject io = new ImageObject();
+
+            XElement elem = xe.Element("imagedata");
+            io.FileRef = elem.Attribute("fileref").Value;
+            io.Value = elem.Value;
+
+            return io;
+        }
+
 		public System.Xml.XmlElement ToXmlElement(System.Xml.XmlDocument doc)
 		{
-			if ( Fileref == null || Fileref == "" )
+            if (FileRef == null || FileRef == "")
 				return null;
 			
 			System.Xml.XmlElement elem = doc.CreateElement("mediaobject");
 			System.Xml.XmlElement elem2 = doc.CreateElement("imageobject");
 			System.Xml.XmlElement elem3 = doc.CreateElement("imagedata");
 			System.Xml.XmlAttribute attr = doc.CreateAttribute("fileref");
-			attr.Value = Fileref;
+            attr.Value = FileRef;
 			
 			elem3.Attributes.Append( attr );
 			
@@ -39,5 +46,10 @@ namespace Jeebook.Base
 			
 			return elem;
 		}
-	}
+
+        public const string LocalName = "imageobject";
+
+        public string FileRef { get; set; }
+        public string Value { get; set; }
+    }
 }

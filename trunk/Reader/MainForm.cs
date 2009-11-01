@@ -35,14 +35,26 @@ namespace Jeebook.Reader
             else
                 return;
 
-
-            System.IO.Stream stream = proxy.GetFileStream("index.xml");
-            Book book = Book.Create(stream);
-            if (book.MediaObject != null)
+            System.IO.Stream stream = null;
+            try
             {
-                ComicView cv = new ComicView(book, proxy);
-                cv.Dock = DockStyle.Fill;
-                this.Controls.Add(cv);
+                //
+                stream = proxy.GetFileStream("index.xml");
+                Book book = Book.Create(stream);
+                stream.Close();
+
+                if (book.MediaObject != null)
+                {
+                    ComicView cv = new ComicView(book, proxy);
+                    cv.Dock = DockStyle.Fill;
+                    this.Controls.Add(cv);
+                }
+            }
+            catch (Exception ex)
+            {
+                if (stream != null)
+                    stream.Close();
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -57,7 +69,7 @@ namespace Jeebook.Reader
 
         private void MainForm_DragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.Text))
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
                 e.Effect = DragDropEffects.Link;
             else
                 e.Effect = DragDropEffects.None; 

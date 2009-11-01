@@ -16,14 +16,6 @@ namespace Jeebook.Base
 	/// </summary>
 	public class Author : Element
 	{
-		public Author()
-		{
-		}
-		
-		public string GetLocalName()	{ return "author";}
-		public void LoadFromString(string str )	{}
-		public override string ToString() { return ""; }
-		
 		public static Author Create(XElement xe)
 		{
 			Author author = new Author();
@@ -32,8 +24,6 @@ namespace Jeebook.Base
 			return author;
 		}
 		
-		public string OtherName { get; set; }
-				
 		public System.Xml.XmlElement ToXmlElement(System.Xml.XmlDocument doc)
 		{
 			if ( OtherName == null || OtherName == "" )
@@ -50,5 +40,8 @@ namespace Jeebook.Base
 			return elem;
 		}
 
+        public const string LocalName = "author";
+
+        public string OtherName { get; set; }
 	}
 }
