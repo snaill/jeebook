@@ -18,9 +18,7 @@ namespace Jeebook.Base
 	/// </summary>
 	public class Book
 	{
-		public Book() {}
-		
-		public static Book Create(string strPath)
+    	public static Book Create(string strPath)
 		{
 			Book book = new Book();
 			XDocument doc = XDocument.Load( strPath + "\\index.xml" );
@@ -47,17 +45,19 @@ namespace Jeebook.Base
         {
             XDocument doc = XDocument.Load(System.Xml.XmlReader.Create(stream));
             Book book = new Book();
+            book.Links = new List<ChapterLink>();
+
             foreach (XElement xe in doc.Root.Elements())
             {
-                if (Info.LocalName == xe.Name)
+                if (Info.LocalName == xe.Name.LocalName)
                 {
                     book.Info = Info.Create(xe);
                 }
-                else if (ChapterLink.LocalName == xe.Name)
+                else if (ChapterLink.LocalName == xe.Name.LocalName)
                 {
                     book.Links.Add(ChapterLink.Create(xe)); 
                 }
-                else if (MediaObject.LocalName == xe.Name)
+                else if (MediaObject.LocalName == xe.Name.LocalName)
                 {
                     book.MediaObject = MediaObject.Create(xe);
                 }

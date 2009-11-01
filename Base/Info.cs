@@ -16,17 +16,7 @@ namespace Jeebook.Base
 	/// </summary>
 	public class Info : Element
 	{
-		public Info()
-		{
-		}
-
-        public const string LocalName = "info";
-
-		public string GetLocalName()	{ return "info";}
-		public void LoadFromString(string str )	{}
-		public override string ToString() { return ""; }
-
-		public static Info Create(XElement xe )
+		public static Info Create( XElement xe )
 		{
 			Info info = new Info();
 			info.Title = xe.Element("title").Value;
@@ -36,10 +26,6 @@ namespace Jeebook.Base
 			return info;
 		}
 		
-		public string Title { get; set; }
-		public string BiblioSource { get; set; }		
-		public Author Author{ get; set; }
-
 		public System.Xml.XmlElement ToXmlElement(System.Xml.XmlDocument doc)
 		{
 			if ( ( Title == null || Title == "" ) && Author == null )
@@ -66,5 +52,11 @@ namespace Jeebook.Base
 			}			
 			return elem;
 		}
+
+        public const string LocalName = "info";
+
+        public string Title { get; set; }
+        public string BiblioSource { get; set; }
+        public Author Author { get; set; }
 	}
 }

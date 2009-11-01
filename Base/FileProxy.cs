@@ -12,7 +12,7 @@ namespace Jeebook.Base
         public FileProxy(string uri)
         {
             _base = uri;
-            if (_base.EndsWith("\\"))
+            if (!_base.EndsWith("\\"))
                 _base += '\\';
         }
 

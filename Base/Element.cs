@@ -15,8 +15,5 @@ namespace Jeebook.Base
 	/// </summary>
 	public interface Element
 	{
-		string GetLocalName();
-		void LoadFromString(string str );		
-		string ToString();
 	}
 }

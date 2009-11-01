@@ -8,11 +8,19 @@ namespace Jeebook.Base
 {
     public class MediaObject
     {
-        public const string LocalName = "medioobject";
-
         public static MediaObject Create(XElement xe)
         {
-            return null;
+            MediaObject mo = new MediaObject();
+            mo.Objects = new List<ImageObject>();
+            foreach (XElement elem in xe.Elements(ImageObject.LocalName))
+            {
+                ImageObject io = ImageObject.Create(elem);
+                mo.Objects.Add(io);
+            }
+            return mo;
         }
+
+        public const string LocalName = "mediaobject";
+        public List<ImageObject> Objects { get; set; }
     }
 }
