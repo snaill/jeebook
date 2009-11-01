@@ -45,9 +45,9 @@ namespace Jeebook.Reader
 
                 if (book.MediaObject != null)
                 {
-                    ComicView cv = new ComicView(book, proxy);
-                    cv.Dock = DockStyle.Fill;
+                    ComicView cv = new ComicView(book.MediaObject, proxy);
                     this.Controls.Add(cv);
+                    cv.Focus();
                 }
             }
             catch (Exception ex)
