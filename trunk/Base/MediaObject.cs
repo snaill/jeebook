@@ -20,6 +20,16 @@ namespace Jeebook.Base
             return mo;
         }
 
+        public XElement ToXElement()
+        {
+            XElement xe = new XElement(LocalName);
+            foreach ( ImageObject io in Objects )
+            {
+                xe.Add(io.ToXElement());
+            }
+            return xe;
+        }
+
         public const string LocalName = "mediaobject";
         public List<ImageObject> Objects { get; set; }
     }

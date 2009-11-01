@@ -17,6 +17,13 @@ namespace Jeebook.Base
             return cl;
         }
 
+        public XElement ToXElement()
+        {
+            XNamespace nsXInclude = "http://www.w3.org/2001/XInclude";
+            return new XElement(nsXInclude + LocalName,
+                new XAttribute("href", Href), Value);
+        }
+
         public const string LocalName = "include";
         public string Href { get; set; }
         public string Value { get; set; }

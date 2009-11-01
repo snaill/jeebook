@@ -13,7 +13,7 @@ using System.Xml;
 using System.Xml.Xsl;
 using System.Windows.Forms;
 
-namespace JeebookToy
+namespace Jeebook.Toy
 {
 	/// <summary>
 	/// Description of PluginForm.

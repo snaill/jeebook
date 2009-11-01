@@ -28,23 +28,12 @@ namespace Jeebook.Base
             return io;
         }
 
-		public System.Xml.XmlElement ToXmlElement(System.Xml.XmlDocument doc)
+		public XElement ToXElement()
 		{
-            if (FileRef == null || FileRef == "")
-				return null;
-			
-			System.Xml.XmlElement elem = doc.CreateElement("mediaobject");
-			System.Xml.XmlElement elem2 = doc.CreateElement("imageobject");
-			System.Xml.XmlElement elem3 = doc.CreateElement("imagedata");
-			System.Xml.XmlAttribute attr = doc.CreateAttribute("fileref");
-            attr.Value = FileRef;
-			
-			elem3.Attributes.Append( attr );
-			
-			elem.AppendChild( elem2 );
-			elem2.AppendChild( elem3 );
-			
-			return elem;
+            return new XElement( LocalName, 
+                new XElement( "imagedata", 
+                    new XAttribute( "fileref", FileRef ), Value ) );
+
 		}
 
         public const string LocalName = "imageobject";

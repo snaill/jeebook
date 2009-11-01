@@ -8,7 +8,7 @@
  */
 using System;
 
-namespace JeebookToy
+namespace Jeebook.Toy
 {
 	public enum Xsl2EngineType
 	{
