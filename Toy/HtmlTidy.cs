@@ -10,7 +10,7 @@ using System;
 using System.IO;
 using System.Text;
 
-namespace JeebookToy
+namespace Jeebook.Toy
 {
 	/// <summary>
 	/// Description of HtmlTidy.

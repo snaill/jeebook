@@ -24,20 +24,11 @@ namespace Jeebook.Base
 			return author;
 		}
 		
-		public System.Xml.XmlElement ToXmlElement(System.Xml.XmlDocument doc)
+		public XElement ToXElement()
 		{
-			if ( OtherName == null || OtherName == "" )
-				return null;
-			
-			System.Xml.XmlElement elem = doc.CreateElement("author");
-			System.Xml.XmlElement elem2 = doc.CreateElement("personname");
-			System.Xml.XmlElement elem3 = doc.CreateElement("othername");
-			elem3.Value = OtherName;
-			
-			elem.AppendChild( elem2 );
-			elem2.AppendChild( elem3 );
-			
-			return elem;
+            return new XElement(LocalName,
+                new XElement("personname",
+                    new XElement("othername", OtherName)));
 		}
 
         public const string LocalName = "author";

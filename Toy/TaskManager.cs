@@ -8,10 +8,10 @@
  */
 using System;
 using System.Threading;
-using JeebookToy.JB;
 using System.Collections.Specialized;
+using Jeebook.Base;
 
-namespace JeebookToy
+namespace Jeebook.Toy
 {
 	public delegate void AddTaskHandler( Task task );
 	
@@ -132,8 +132,11 @@ namespace JeebookToy
             {
                 str = str + s[i].ToString("x");
             }
-			
-            str = Path + "\\" + str;
+
+            if (!Path.EndsWith("\\"))
+                Path += '\\';
+
+            str = Path + str;
             if ( !System.IO.Directory.Exists( str ) )
             	System.IO.Directory.CreateDirectory( str );
             return str;

@@ -18,29 +18,6 @@ namespace Jeebook.Base
 	/// </summary>
 	public class Book
 	{
-    	public static Book Create(string strPath)
-		{
-			Book book = new Book();
-			XDocument doc = XDocument.Load( strPath + "\\index.xml" );
-			book.Info = Info.Create( doc.Root.Element("info") );
-			
-			var chaps = from cNode in doc.Root.Elements(XName.Get("include", "http://www.w3.org/2001/XInclude"))
-				select new Chapter 
-				{
-					Title = cNode.Value,
-					Uri = cNode.Attribute("href").Value
-				};
-			
-            //foreach( Chapter c in chaps )
-            //{
-            //    c.Uri = strPath + "\\" + c.Uri;
-            //    book.Links.Add( c );
-            //}
-			
-			book.Path = strPath;
-			return book;
-		}
-
         public static Book Create(System.IO.Stream stream)
         {
             XDocument doc = XDocument.Load(System.Xml.XmlReader.Create(stream));
@@ -73,24 +50,26 @@ namespace Jeebook.Base
 		
 		public void Save( string strPath )
 		{
-			System.Xml.XmlDocument doc = new System.Xml.XmlDocument();
+            XNamespace nsDocbook = "http://docbook.org/ns/docbook";
+            XNamespace nsXLink = "http://www.w3.org/1999/xlink";
+            XNamespace nsXInclude = "http://www.w3.org/2001/XInclude";
 
-			System.Xml.XmlNamespaceManager xnm = new System.Xml.XmlNamespaceManager(doc.NameTable);
-			xnm.AddNamespace("", "http://docbook.org/ns/docbook");
-			xnm.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
-			xnm.AddNamespace("xi", "http://www.w3.org/2001/XInclude");
-			
-			if ( Info != null )
-			{
-				System.Xml.XmlElement elem = Info.ToXmlElement(doc);
-				if ( elem != null )
-					doc.AppendChild( elem );
-			}
-			
-            //foreach ( Chapter chap in Chapters )
-            //{
-            //    //chap.Save();
-            //}
+            XElement root = new XElement("book");
+            root.SetAttributeValue(XNamespace.Xmlns + "", nsDocbook);
+            root.SetAttributeValue(XNamespace.Xmlns + "xlink", nsXLink);
+            root.SetAttributeValue(XNamespace.Xmlns + "xi", nsXInclude);
+
+            if ( Info != null )
+                root.Add( Info.ToXElement() );
+
+            foreach (ChapterLink link in Links)
+                root.Add(link.ToXElement());
+
+            if (MediaObject != null)
+                root.Add(MediaObject.ToXElement());
+
+            XDocument doc = new XDocument(root);
+            doc.Save(strPath);
 		}
 	}
 }

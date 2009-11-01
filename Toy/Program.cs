@@ -9,7 +9,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace JeebookToy
+namespace Jeebook.Toy
 {
 	/// <summary>
 	/// Class with program entry point.

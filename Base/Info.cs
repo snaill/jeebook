@@ -25,32 +25,13 @@ namespace Jeebook.Base
 			
 			return info;
 		}
-		
-		public System.Xml.XmlElement ToXmlElement(System.Xml.XmlDocument doc)
+
+        public XElement ToXElement()
 		{
-			if ( ( Title == null || Title == "" ) && Author == null )
-				return null;
-			
-			System.Xml.XmlElement elem = doc.CreateElement("info");
-			if ( string.IsNullOrEmpty( Title ) )
-			{
-				System.Xml.XmlElement elem2 = doc.CreateElement("title");
-				elem2.Value = Title;
-				elem.AppendChild( elem2 );
-			}
-			if ( Author != null )
-			{
-				System.Xml.XmlElement elem2 = Author.ToXmlElement( doc );
-				if ( elem2 != null )
-					elem.AppendChild(elem2);
-			}
-			if ( string.IsNullOrEmpty( BiblioSource) )
-			{
-				System.Xml.XmlElement elem2 = doc.CreateElement("bibliosource");
-				elem2.Value = BiblioSource;
-				elem.AppendChild( elem2 );
-			}			
-			return elem;
+            return new XElement(LocalName,
+                new XElement("title", Title),
+                Author.ToXElement(),
+                new XElement("bibliosource", BiblioSource));
 		}
 
         public const string LocalName = "info";

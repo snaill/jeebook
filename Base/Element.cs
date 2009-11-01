@@ -15,5 +15,6 @@ namespace Jeebook.Base
 	/// </summary>
 	public interface Element
 	{
+        System.Xml.Linq.XElement ToXElement();
 	}
 }

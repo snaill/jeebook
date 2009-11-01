@@ -13,7 +13,7 @@ using System.Windows.Forms;
 using System.Collections.Specialized;
 using JeebookToy.Controls;
 
-namespace JeebookToy
+namespace Jeebook.Toy
 {
 	/// <summary>
 	/// Description of MainForm.
@@ -128,7 +128,9 @@ namespace JeebookToy
 
         private void AddFromComicFolderMenuItem_Click(object sender, EventArgs e)
         {
-            string[] files = System.IO.Directory.GetFiles(UrlTextBox.Text);
+            Task task = new ComicTask();
+            task.Create(UrlTextBox.Text, null, TManager.CreateTaskPath(UrlTextBox.Text), System.Windows.Forms.Application.StartupPath + "\\JBs\\");
+            TManager.Add(task);           
         }
 	}
 }

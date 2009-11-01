@@ -9,7 +9,7 @@
 using System;
 using Altova.AltovaXML;
 
-namespace JeebookToy
+namespace Jeebook.Toy
 {
 	public delegate void TaskStateChangedHandler( TaskStateChangedEventArgs args );
 		

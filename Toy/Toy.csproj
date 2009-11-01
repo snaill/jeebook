@@ -4,8 +4,8 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>JeebookToy</RootNamespace>
-    <AssemblyName>JeebookToy</AssemblyName>
+    <RootNamespace>Jeebook.Toy</RootNamespace>
+    <AssemblyName>Jeebook.Toy</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <SourceAnalysisOverrideSettingsFile>C:\Users\Snaill\AppData\Roaming\ICSharpCode/SharpDevelop3.0\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BookTask.cs" />
+    <Compile Include="ComicTask.cs" />
     <Compile Include="Controls\SplitButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -88,14 +89,6 @@
       <DependentUpon>EditorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="HtmlTidy.cs" />
-    <Compile Include="JB\Author.cs" />
-    <Compile Include="JB\Book.cs" />
-    <Compile Include="JB\Chapter.cs" />
-    <Compile Include="JB\Element.cs" />
-    <Compile Include="JB\Image.cs" />
-    <Compile Include="JB\Info.cs" />
-    <Compile Include="JB\Link.cs" />
-    <Compile Include="JB\Para.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,5 +126,11 @@
     <EmbeddedResource Include="TesterForm.resx">
       <DependentUpon>TesterForm.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Base\Base.csproj">
+      <Project>{C782FB22-EDF0-44FB-AE8E-5ADF4D16111E}</Project>
+      <Name>Base</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

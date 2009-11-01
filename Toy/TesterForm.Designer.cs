@@ -6,7 +6,7 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
-namespace JeebookToy
+namespace Jeebook.Toy
 {
 	partial class TesterForm
 	{

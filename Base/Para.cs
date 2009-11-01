@@ -15,7 +15,7 @@ namespace Jeebook.Base
 	/// <summary>
 	/// Description of Para.
 	/// </summary>
-	public class Para : Element
+	public class Para
 	{
 		public Para()
 		{
