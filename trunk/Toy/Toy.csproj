@@ -112,6 +112,7 @@
     <Compile Include="Task.cs" />
     <Compile Include="TaskManager.cs" />
     <Compile Include="TaskStateChangedEventArgs.cs" />
+    <Compile Include="TextTask.cs" />
     <Compile Include="Xsl2Engine.cs" />
     <EmbeddedResource Include="EditorForm.resx">
       <DependentUpon>EditorForm.cs</DependentUpon>

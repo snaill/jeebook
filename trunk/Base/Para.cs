@@ -17,9 +17,11 @@ namespace Jeebook.Base
 	/// </summary>
 	public class Para
 	{
-		public Para()
-		{
-		}
+		public Para() {	}
+        public Para(string text) 
+        { 
+            Text = text; 
+        }
 			
 		public string GetLocalName()	{ return "para";}
 
@@ -30,16 +32,7 @@ namespace Jeebook.Base
 			return para;
 		}
 		
-		public void LoadFromString(string str )
-		{
-			Text = str;
-		}
-		
-		public override string ToString() 
-		{
-			return Text;
-		}
-		public const string Xml_LocalName = "para";
+		public const string LocalName = "para";
 		public string Text;
 	}
 }
