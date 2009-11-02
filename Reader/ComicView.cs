@@ -29,28 +29,34 @@ namespace Jeebook.Reader
                 return;
 
             System.IO.Stream stream = _proxy.GetFileStream(_media.Objects[index].FileRef);
-            ImageBox.Image = System.Drawing.Image.FromStream(stream);
+            System.Drawing.Image image = System.Drawing.Image.FromStream(stream);
             stream.Close();
 
-            ResizeImageBox();   
+            ResizeImageBox(image);
+            ImageBox.Image = image;
         }
 
-        public void ResizeImageBox()
+        public void ResizeImageBox(System.Drawing.Image image)
         {
             //
-            if (this.Width < ImageBox.Image.Width)
+            if (this.Width < image.Width)
             {
-                ImageBox.Height = ImageBox.Image.Height * this.Width / ImageBox.Image.Width;
+                ImageBox.Height = image.Height * this.Width / image.Width;
                 ImageBox.Width = this.Width;
+            }
+            else
+            {
+                ImageBox.Height = image.Height;
+                ImageBox.Width = image.Width;
             }
 
             ImageBox.Left = (this.Width - ImageBox.Width) / 2;
-            ImageBox.Top = 0;
+            ImageBox.Top = (this.Height < ImageBox.Height) ? 0 : (this.Height - ImageBox.Height) / 2;
         }
 
         private void ComicView_Resize(object sender, EventArgs e)
         {
-            ResizeImageBox();
+            ResizeImageBox(ImageBox.Image);
         }
 
         private void ComicView_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
