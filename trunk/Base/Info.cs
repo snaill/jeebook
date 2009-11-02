@@ -16,6 +16,14 @@ namespace Jeebook.Base
 	/// </summary>
 	public class Info : Element
 	{
+        public Info() { }
+        public Info(string title, Author author, string biblioSource)
+        {
+            Title = title;
+            Author = author;
+            BiblioSource = biblioSource;
+        }
+
 		public static Info Create( XElement xe )
 		{
 			Info info = new Info();

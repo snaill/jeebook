@@ -17,7 +17,24 @@ namespace Jeebook.Toy
 	public class BookTask : Task, ITaskNotify
 	{
 		public event TaskStateChangedHandler TaskStateChanged;
-		
+
+        /// <summary>
+        /// 执行该任务所需要的插件路径
+        /// </summary>
+        public string XsltPath = "";
+
+        /// <summary>
+        /// 暂存临时文件（等待打包文件）的路径
+        /// </summary>
+        public string XmlPath = "";
+
+        public void Create(string uri, string strXsltPath, string strXmlPath, string strJBPath)
+        {
+            XsltPath = strXsltPath;
+            XmlPath = strXmlPath;
+            base.Create(uri, strJBPath);
+        }
+
 		public override void  Run()
 		{
 			TaskStateChangedEventArgs args = new TaskStateChangedEventArgs(this);

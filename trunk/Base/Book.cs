@@ -54,16 +54,19 @@ namespace Jeebook.Base
             XNamespace nsXLink = "http://www.w3.org/1999/xlink";
             XNamespace nsXInclude = "http://www.w3.org/2001/XInclude";
 
-            XElement root = new XElement("book");
-            root.SetAttributeValue(XNamespace.Xmlns + "", nsDocbook);
+            XElement root = new XElement(nsDocbook + "book");
+            root.SetAttributeValue("version", "5.0");
             root.SetAttributeValue(XNamespace.Xmlns + "xlink", nsXLink);
             root.SetAttributeValue(XNamespace.Xmlns + "xi", nsXInclude);
 
             if ( Info != null )
                 root.Add( Info.ToXElement() );
 
-            foreach (ChapterLink link in Links)
-                root.Add(link.ToXElement());
+            if (Links != null)
+            {
+                foreach (ChapterLink link in Links)
+                    root.Add(link.ToXElement());
+            }
 
             if (MediaObject != null)
                 root.Add(MediaObject.ToXElement());

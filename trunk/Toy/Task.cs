@@ -17,6 +17,7 @@ namespace Jeebook.Toy
 	{
 		Ready,
 		Downloading,
+        Analysing,
 		ToXHtml,
 		ToJeebook,
 		Packaging,
@@ -53,16 +54,6 @@ namespace Jeebook.Toy
 		public TaskState State = TaskState.Ready;
 		
 		/// <summary>
-		/// 执行该任务所需要的插件路径
-		/// </summary>
-		public string XsltPath = "";
-		
-		/// <summary>
-		/// 暂存临时文件（等待打包文件）的路径
-		/// </summary>
-		public string XmlPath = "";
-		
-		/// <summary>
 		/// 目标文件（打包后文件）路径
 		/// </summary>
 		public string JBPath = "";
@@ -71,13 +62,11 @@ namespace Jeebook.Toy
 		{
 		}
 		
-		public virtual void Create(string url, string strXsltPath, string strXmlPath, string strJBPath)
+		public virtual void Create(string url, string strJBPath)
 		{
 			Name = "New Task";
 			Uri = url;
 			State = TaskState.Ready;
-			XsltPath = strXsltPath;
-			XmlPath = strXmlPath;
 			JBPath = strJBPath;	
 		}
 		

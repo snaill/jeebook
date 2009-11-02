@@ -45,8 +45,8 @@ namespace Jeebook.Toy
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.MainToolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.AddFromComicFolderMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AddFromBookUrlMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AddFromComicFolderMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AddFromTextFileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.UrlTextBox = new JeebookToy.Controls.ToolStripSpringTextBox();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -62,9 +62,9 @@ namespace Jeebook.Toy
             this.columnHeader2});
             this.TaskListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TaskListView.FullRowSelect = true;
-            this.TaskListView.Location = new System.Drawing.Point(0, 0);
+            this.TaskListView.Location = new System.Drawing.Point(0, 39);
             this.TaskListView.Name = "TaskListView";
-            this.TaskListView.Size = new System.Drawing.Size(419, 272);
+            this.TaskListView.Size = new System.Drawing.Size(419, 233);
             this.TaskListView.SmallImageList = this.TaskStateImageList;
             this.TaskListView.TabIndex = 0;
             this.TaskListView.UseCompatibleStateImageBehavior = false;
@@ -129,30 +129,30 @@ namespace Jeebook.Toy
             this.toolStripDropDownButton1.Size = new System.Drawing.Size(45, 36);
             this.toolStripDropDownButton1.ToolTipText = "AddToolStripDropDownButton";
             // 
-            // AddFromComicFolderMenuItem
-            // 
-            this.AddFromComicFolderMenuItem.Name = "AddFromComicFolderMenuItem";
-            this.AddFromComicFolderMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.AddFromComicFolderMenuItem.Text = "Comic Folder";
-            this.AddFromComicFolderMenuItem.Click += new System.EventHandler(this.AddFromComicFolderMenuItem_Click);
-            // 
             // AddFromBookUrlMenuItem
             // 
             this.AddFromBookUrlMenuItem.Name = "AddFromBookUrlMenuItem";
-            this.AddFromBookUrlMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.AddFromBookUrlMenuItem.Size = new System.Drawing.Size(145, 22);
             this.AddFromBookUrlMenuItem.Text = "Book Url";
             this.AddFromBookUrlMenuItem.Click += new System.EventHandler(this.AddFromBookUrlMenuItem_Click);
+            // 
+            // AddFromComicFolderMenuItem
+            // 
+            this.AddFromComicFolderMenuItem.Name = "AddFromComicFolderMenuItem";
+            this.AddFromComicFolderMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.AddFromComicFolderMenuItem.Text = "Comic Folder";
+            this.AddFromComicFolderMenuItem.Click += new System.EventHandler(this.AddFromComicFolderMenuItem_Click);
             // 
             // AddFromTextFileMenuItem
             // 
             this.AddFromTextFileMenuItem.Name = "AddFromTextFileMenuItem";
-            this.AddFromTextFileMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.AddFromTextFileMenuItem.Size = new System.Drawing.Size(145, 22);
             this.AddFromTextFileMenuItem.Text = "Text File";
             // 
             // UrlTextBox
             // 
             this.UrlTextBox.Name = "UrlTextBox";
-            this.UrlTextBox.Size = new System.Drawing.Size(226, 39);
+            this.UrlTextBox.Size = new System.Drawing.Size(262, 39);
             // 
             // toolStripSeparator1
             // 
@@ -185,8 +185,8 @@ namespace Jeebook.Toy
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(419, 294);
-            this.Controls.Add(this.MainToolStrip);
             this.Controls.Add(this.TaskListView);
+            this.Controls.Add(this.MainToolStrip);
             this.Controls.Add(this.StatusStrip);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -200,7 +200,6 @@ namespace Jeebook.Toy
             this.PerformLayout();
 
 		}
-		private System.Windows.Forms.ToolStrip MainToolStrip;
 		private System.Windows.Forms.ToolStripButton EditorToolButton;
 		private System.Windows.Forms.ToolStripButton TesterToolButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
@@ -208,7 +207,8 @@ namespace Jeebook.Toy
 		private System.Windows.Forms.ListView TaskListView;
 		private System.Windows.Forms.ColumnHeader columnHeader2;
 		private System.Windows.Forms.ColumnHeader columnHeader1;
-		private System.Windows.Forms.StatusStrip StatusStrip;
+        private System.Windows.Forms.ToolStrip MainToolStrip; 
+        private System.Windows.Forms.StatusStrip StatusStrip;
 		private JeebookToy.Controls.ToolStripSpringTextBox UrlTextBox;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
         private System.Windows.Forms.ToolStripMenuItem AddFromComicFolderMenuItem;

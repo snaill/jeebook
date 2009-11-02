@@ -63,6 +63,7 @@ namespace Jeebook.Toy
 			case TaskState.Ready: return "Ready";
 			case TaskState.Finished: return "Finished";
 			case TaskState.Packaging: return "Packaging ...";
+            case TaskState.Analysing: return "Analysing...";
 			case TaskState.Failed: return "Failed : " + ErrorMassage; 
 			case TaskState.Downloading:
 				return string.Format("[{0}/{1}] Downloading : {2}", FinishedCount, TotalCount, Url );
