@@ -17,6 +17,13 @@ namespace Jeebook.Base
 	/// </summary>
 	public class ImageObject
 	{
+        public ImageObject() { }
+        public ImageObject(string fileRef, string value)
+        {
+            FileRef = fileRef;
+            Value = value;
+        }
+
         public static ImageObject Create(XElement xe)
         {
             ImageObject io = new ImageObject();

@@ -16,6 +16,12 @@ namespace Jeebook.Base
 	/// </summary>
 	public class Author : Element
 	{
+        public Author() { }
+        public Author(string otherName)
+        {
+            OtherName = otherName; 
+        }
+
 		public static Author Create(XElement xe)
 		{
 			Author author = new Author();

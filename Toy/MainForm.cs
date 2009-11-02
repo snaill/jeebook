@@ -121,7 +121,7 @@ namespace Jeebook.Toy
                 return;
             }
 
-            Task task = new BookTask();
+            BookTask task = new BookTask();
             task.Create(UrlTextBox.Text, strPlugin, TManager.CreateTaskPath(UrlTextBox.Text), System.Windows.Forms.Application.StartupPath + "\\JBs\\");
             TManager.Add(task);
         }
@@ -129,7 +129,7 @@ namespace Jeebook.Toy
         private void AddFromComicFolderMenuItem_Click(object sender, EventArgs e)
         {
             Task task = new ComicTask();
-            task.Create(UrlTextBox.Text, null, TManager.CreateTaskPath(UrlTextBox.Text), System.Windows.Forms.Application.StartupPath + "\\JBs\\");
+            task.Create(UrlTextBox.Text, System.Windows.Forms.Application.StartupPath + "\\JBs\\");
             TManager.Add(task);           
         }
 	}
