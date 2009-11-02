@@ -8,6 +8,13 @@ namespace Jeebook.Base
 {
     public class ChapterLink
     {
+        public ChapterLink() { }
+        public ChapterLink( string href, string value)
+        {
+            Href = href;
+            Value = value;
+        }
+
         public static ChapterLink Create(XElement xe)
         {
             ChapterLink cl = new ChapterLink();
