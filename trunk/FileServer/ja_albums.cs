@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using Newtonsoft.Json;
+using Jeebook.FileServer;
 
-namespace JSuit.ja
+namespace Jeebook.Alumb
 {
     public class albums : IHttpHandler
     {
@@ -14,7 +15,7 @@ namespace JSuit.ja
             string strPath = context.Request.QueryString["path"];
 
             //
-            Docbase dc = new Docbase( context.Server.MapPath("../data/"), "ja_" );
+            FileServerBase dc = new FileServerBase( context.Server.MapPath("../data/") );
             string dirs = dc.GetDirectories(strPath);
 
             context.Response.WriteFile(dirs);
