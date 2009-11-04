@@ -41,15 +41,15 @@ namespace Jeebook.Toy
                 System.IO.StreamWriter sw = new System.IO.StreamWriter(strTemp, false, System.Text.Encoding.Unicode);
                 int size = sr.BaseStream.Length - sr.BaseStream.Position < MaxSize * 2 ? MaxSize / 2 : MaxSize;
 
-                Chapter chap = new Chapter();
-                chap.Elements = new List<Element>();
-                chap.Title = "001";
-                chap.Uri = "001.xml";
-                string str = sr.ReadLine();
-              //  chap.Elements.Add(new Para(str));
+              //  Chapter chap = new Chapter();
+              //  chap.Elements = new List<Element>();
+              //  chap.Title = "001";
+              //  chap.Uri = "001.xml";
+              //  string str = sr.ReadLine();
+              ////  chap.Elements.Add(new Para(str));
 
-                zf.Add(strTemp, chap.Uri);
-                book.Links.Add(new ChapterLink(chap.Uri, chap.Title));
+              //  zf.Add(strTemp, chap.Uri);
+              //  book.Links.Add(new ChapterLink(chap.Uri, chap.Title));
             }
             sr.Close();
 

@@ -51,6 +51,12 @@ namespace Jeebook.Reader
                     this.Controls.Add(cv);
                     cv.Focus();
                 }
+                else 
+                {
+                    BookView bv = new BookView(book, proxy);
+                    this.Controls.Add(bv);
+                    bv.Focus();
+                }
             }
             catch (Exception ex)
             {
