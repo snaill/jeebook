@@ -46,7 +46,7 @@ namespace Jeebook.Toy
                 chap.Title = "001";
                 chap.Uri = "001.xml";
                 string str = sr.ReadLine();
-                chap.Elements.Add(new Para(str));
+              //  chap.Elements.Add(new Para(str));
 
                 zf.Add(strTemp, chap.Uri);
                 book.Links.Add(new ChapterLink(chap.Uri, chap.Title));

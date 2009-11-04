@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("JeebookReader")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Jeebook.com")]
 [assembly: AssemblyProduct("JeebookReader")]
-[assembly: AssemblyCopyright("Copyright ©  2009")]
+[assembly: AssemblyCopyright("Copyright ©  2009 Jeebook.com")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
