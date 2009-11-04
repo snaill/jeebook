@@ -9,30 +9,44 @@
 using System;
 using System.Linq;
 using System.Xml.Linq;
+using System.Collections.Generic;
 
 namespace Jeebook.Base
 {
 	/// <summary>
 	/// Description of Para.
 	/// </summary>
-	public class Para
+	public class Para : Element
 	{
 		public Para() {	}
-        public Para(string text) 
-        { 
-            Text = text; 
-        }
 			
-		public string GetLocalName()	{ return "para";}
-
 		public static Para Create(XElement xe )
 		{
 			Para para = new Para();
-			para.Text = xe.Value;
+            para.Elements = new List<Element>();
+            foreach (XElement elem in xe.Elements())
+            {
+                if (elem.GetType() == typeof(XText))
+                    para.Elements.Add(Text.Create(xe));
+                else if (Link.LocalName == xe.Name.LocalName)
+                    para.Elements.Add(Link.Create(xe));
+                else if (MediaObject.LocalName == xe.Name.LocalName)
+                    para.Elements.Add(MediaObject.Create(xe));
+
+            }
 			return para;
 		}
-		
-		public const string LocalName = "para";
-		public string Text;
+
+        public System.Xml.Linq.XElement ToXElement()
+        {
+            XElement xe = new XElement("para", "");
+            foreach (Element elem in Elements)
+                xe.Add(elem.ToXElement());
+            return xe;
+        }
+
+		public const string     LocalName = "para";
+
+        public List<Element> Elements { get; set; }
 	}
 }

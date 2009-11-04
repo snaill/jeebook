@@ -46,7 +46,6 @@ namespace Jeebook.Base
 		public Info Info{ get; set;	}
         public List<ChapterLink> Links { get; set; }
         public MediaObject MediaObject { get; set; }
-		public string Path;
 		
 		public void Save( string strPath )
 		{

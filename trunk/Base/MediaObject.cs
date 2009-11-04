@@ -6,7 +6,7 @@ using System.Xml.Linq;
 
 namespace Jeebook.Base
 {
-    public class MediaObject
+    public class MediaObject : Element
     {
         public static MediaObject Create(XElement xe)
         {
