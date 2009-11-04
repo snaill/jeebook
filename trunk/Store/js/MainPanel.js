@@ -10,7 +10,8 @@ Ext.app.MainPanel = function() {
 	  
 	// create the Grid
 	this.grid = new Ext.app.StoreGrid();
-
+	var tree = new Ext.app.StoreTree();
+	
 	Ext.app.MainPanel.superclass.constructor.call(this, {
 		id 		  : 'MainPanel_Id',
 		region    : 'center',
@@ -19,7 +20,7 @@ Ext.app.MainPanel = function() {
 		defaults  : {
 			autoScroll : true
 		},
-		tbar:new Ext.Toolbar([new Ext.Action({
+ 		tbar:new Ext.Toolbar([new Ext.Action({
 			id:'btn_addFolder',
 			text: Ext.app.Resource.Toolbar.AddFolder,
 			disabled : false,
@@ -55,9 +56,9 @@ Ext.app.MainPanel = function() {
 			handler: this.onDelete,
 			scope:this
 		})]),
-		items   : [this.grid, 
+		items   : [tree, this.grid, 
 				  new Ext.app.ContentPanel()
-		]
+		] 
 	});
 };
 

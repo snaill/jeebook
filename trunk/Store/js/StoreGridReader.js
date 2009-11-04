@@ -13,8 +13,7 @@ Ext.app.StoreGridReader = function() {
 		{name: 'name'},
 		{name: 'size'},
 		{name: 'time'},
-		{name: 'id'},
-		{name: 'remark'}
+		{name: 'extension'}
 	];
 
     Ext.app.StoreGridReader.superclass.constructor.call(this, meta, recordType);

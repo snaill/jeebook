@@ -28,9 +28,9 @@ Ext.onReady(function(){
 	var header = new Ext.Panel({
 		layout 	: 'border',
 		region : 'north',
-		height : 115,
+		height : 80,
 		items 	: [
-			new Ext.app.Navigatebar(),
+		//	new Ext.app.Navigatebar(),
 			{
 				region : 'west',
 				border : false,
@@ -75,12 +75,12 @@ Ext.onReady(function(){
 		]
 	});
 
-	var tree = new Ext.app.StoreTree();
+//	var tree = new Ext.app.StoreTree();
 	var main = new Ext.app.MainPanel();
 
 	var viewport = new Ext.Viewport({
 		layout : 'border',
-		items : [ header, tree, main ]	
+		items : [ header, main ]//tree, main ]	
 	});
 	
 	viewport.doLayout();

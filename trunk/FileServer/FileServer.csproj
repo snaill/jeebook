@@ -8,8 +8,8 @@
     <ProjectGuid>{E020658E-3F30-48C0-AE58-40BDB5AC884A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>JSuit</RootNamespace>
-    <AssemblyName>JSuit</AssemblyName>
+    <RootNamespace>Jeebook.FileServer</RootNamespace>
+    <AssemblyName>Jeebook.FileServer</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -60,6 +60,8 @@
     <Compile Include="ja_albums.cs" />
     <Compile Include="Class.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StoreCmdGetDirectories.cs" />
+    <Compile Include="StoreCmdGetFiles.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
