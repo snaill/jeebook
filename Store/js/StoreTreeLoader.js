@@ -23,7 +23,7 @@ Ext.app.StoreTreeLoader = Ext.extend( Ext.tree.TreeLoader, {
     },
     requestData : function(node, callback){
         if(this.fireEvent("beforeload", this, node, callback) !== false){
-			var url = 'ashx/GetFolders.ashx';
+			var url = 'ashx/GetDirectories.ashx';
 			var nodePath = Ext.app.StoreTree.getObj().getPath( node );
             this.transId = Ext.Ajax.request({
                 method:'GET',
@@ -46,10 +46,10 @@ Ext.app.StoreTreeLoader = Ext.extend( Ext.tree.TreeLoader, {
     /**
     * Override this function for custom TreeNode node implementation
     */
-    createNode : function( name ){
+    createNode : function( dir ){
 		return	new Ext.tree.AsyncTreeNode({
-			id : name,
-			text : name
+			id : dir.name,
+			text : dir.name
 		});
     },
 

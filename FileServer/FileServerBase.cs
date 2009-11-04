@@ -36,23 +36,27 @@ namespace Jeebook.FileServer
                 string[] strDirs = System.IO.Directory.GetDirectories(strPath);
                 System.IO.TextWriter tw = new System.IO.StreamWriter(strJson);
                 JsonWriter jw = new JsonTextWriter(tw);
+                jw.WriteStartObject();
+                jw.WritePropertyName("success");
+                jw.WriteValue(true);
+                jw.WritePropertyName("data");
                 jw.WriteStartArray();
                 foreach ( string strD in strDirs )
                 {
                 	System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(strD);
-                	if ( di.Name.StartsWith( DirPrefix ) )
+                    if (di.Name.StartsWith(DirPrefix) 
+                        || (di.Attributes & System.IO.FileAttributes.Hidden) == System.IO.FileAttributes.Hidden)
                 		continue;
                 	
                     jw.WriteStartObject();
-                    jw.WritePropertyName("id");
-                    jw.WriteValue(di.Name);
-                    jw.WritePropertyName("text");
+                    jw.WritePropertyName("name");
                     jw.WriteValue(di.Name);
                     jw.WritePropertyName("leaf");
                     jw.WriteValue(true);
                     jw.WriteEndObject();
                 }
                 jw.WriteEndArray();
+                jw.WriteEndObject();
 
                 tw.Close();
             }
@@ -74,25 +78,32 @@ namespace Jeebook.FileServer
                 string[] strFiles = System.IO.Directory.GetFiles(strPath);
                 System.IO.TextWriter tw = new System.IO.StreamWriter(strJson);
                 JsonWriter jw = new JsonTextWriter(tw);
+                jw.WriteStartObject();
+                jw.WritePropertyName("success");
+                jw.WriteValue(true);
+                jw.WritePropertyName("data");
                 jw.WriteStartArray();
                 foreach ( string strFile in strFiles )
                 {
-                	System.IO.FileInfo fi = new System.IO.FileInfo(strDir);
+                    System.IO.FileInfo fi = new System.IO.FileInfo(strFile);
                 	if ( ( !String.IsNullOrEmpty( FileExtension ) 
                 	      && FileExtension.IndexOf(System.IO.Path.GetExtension( fi.Name )) < 0 )
                 	    || fi.Name == DirCacheName || fi.Name == FileCacheName )
                 		continue;
                  	
                     jw.WriteStartObject();
-                    jw.WritePropertyName("id");
-                    jw.WriteValue(fi.Name);
-                    jw.WritePropertyName("text");
+                    jw.WritePropertyName("name");
                     jw.WriteValue(fi.Name);
                     jw.WritePropertyName("size");
                     jw.WriteValue(fi.Length);
+                    jw.WritePropertyName("time");
+                    jw.WriteValue(fi.CreationTimeUtc);
+                    jw.WritePropertyName("extension");
+                    jw.WriteValue(fi.Extension);
                     jw.WriteEndObject();
                 }
                 jw.WriteEndArray();
+                jw.WriteEndObject();
 
                 tw.Close();
             }
