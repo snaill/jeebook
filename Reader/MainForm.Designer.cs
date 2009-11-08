@@ -38,6 +38,7 @@
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(284, 262);
             this.MainPanel.TabIndex = 0;
+            this.MainPanel.Uri = "";
             // 
             // MainForm
             // 
@@ -49,6 +50,7 @@
             this.Name = "MainForm";
             this.Text = "Jeebook Reader";
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainForm_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.MainForm_DragEnter);
             this.ResumeLayout(false);
