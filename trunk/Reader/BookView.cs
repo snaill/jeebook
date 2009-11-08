@@ -47,8 +47,6 @@ namespace Jeebook.Reader
                         sb.Append(EncodeAnsi(link.Value));
                         sb.Append("}}}");
 
-                       
-                        string str = sb.ToString();
                         AppendRtf(sb.ToString());
                     }
                     else if (elem.GetType() == typeof(MediaObject))
