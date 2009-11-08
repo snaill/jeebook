@@ -19,16 +19,17 @@ namespace Jeebook.Toy
 
         public override void Run()
         {
+            string title = this.Uri;
+            if (title.EndsWith("\\"))
+                title.Substring(0, title.Length - 1);
+            title = title.Substring(title.LastIndexOf("\\") + 1);
+            this.Name = title;
+
             TaskStateChangedEventArgs args = new TaskStateChangedEventArgs(this);
             args.Url = this.Uri;
             State = TaskState.Analysing;
             if (TaskStateChanged != null)
                 TaskStateChanged(args);
-
-            string title = args.Url;
-            if (title.EndsWith("\\"))
-                title.Substring(0, title.Length - 1);
-            title = title.Substring(title.LastIndexOf("\\") + 1);
 
             ZipFile zf = ZipFile.Create(JBPath + title + ".jb");
             zf.BeginUpdate();
