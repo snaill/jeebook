@@ -69,6 +69,8 @@ namespace Jeebook.Toy
             this.TaskListView.TabIndex = 0;
             this.TaskListView.UseCompatibleStateImageBehavior = false;
             this.TaskListView.View = System.Windows.Forms.View.Details;
+            this.TaskListView.DragDrop += new System.Windows.Forms.DragEventHandler(this.TaskListView_DragDrop);
+            this.TaskListView.DragEnter += new System.Windows.Forms.DragEventHandler(this.TaskListView_DragEnter);
             // 
             // columnHeader1
             // 
@@ -132,22 +134,23 @@ namespace Jeebook.Toy
             // AddFromBookUrlMenuItem
             // 
             this.AddFromBookUrlMenuItem.Name = "AddFromBookUrlMenuItem";
-            this.AddFromBookUrlMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.AddFromBookUrlMenuItem.Size = new System.Drawing.Size(152, 22);
             this.AddFromBookUrlMenuItem.Text = "Book Url";
             this.AddFromBookUrlMenuItem.Click += new System.EventHandler(this.AddFromBookUrlMenuItem_Click);
             // 
             // AddFromComicFolderMenuItem
             // 
             this.AddFromComicFolderMenuItem.Name = "AddFromComicFolderMenuItem";
-            this.AddFromComicFolderMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.AddFromComicFolderMenuItem.Size = new System.Drawing.Size(152, 22);
             this.AddFromComicFolderMenuItem.Text = "Comic Folder";
             this.AddFromComicFolderMenuItem.Click += new System.EventHandler(this.AddFromComicFolderMenuItem_Click);
             // 
             // AddFromTextFileMenuItem
             // 
             this.AddFromTextFileMenuItem.Name = "AddFromTextFileMenuItem";
-            this.AddFromTextFileMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.AddFromTextFileMenuItem.Size = new System.Drawing.Size(152, 22);
             this.AddFromTextFileMenuItem.Text = "Text File";
+            this.AddFromTextFileMenuItem.Click += new System.EventHandler(this.AddFromTextFileMenuItem_Click);
             // 
             // UrlTextBox
             // 
@@ -192,7 +195,6 @@ namespace Jeebook.Toy
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "JeebookToy";
-            this.Load += new System.EventHandler(this.MainFormLoad);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainFormFormClosed);
             this.MainToolStrip.ResumeLayout(false);
             this.MainToolStrip.PerformLayout();
