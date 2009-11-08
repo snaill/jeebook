@@ -49,14 +49,10 @@ namespace Jeebook.Base
 		
 		public void Save( string strPath )
 		{
-            XNamespace nsDocbook = "http://docbook.org/ns/docbook";
-            XNamespace nsXLink = "http://www.w3.org/1999/xlink";
-            XNamespace nsXInclude = "http://www.w3.org/2001/XInclude";
-
-            XElement root = new XElement(nsDocbook + "book");
+            XElement root = new XElement(Namespace.Docbook + "book");
             root.SetAttributeValue("version", "5.0");
-            root.SetAttributeValue(XNamespace.Xmlns + "xlink", nsXLink);
-            root.SetAttributeValue(XNamespace.Xmlns + "xi", nsXInclude);
+            root.SetAttributeValue(XNamespace.Xmlns + "xlink", Namespace.XLink);
+            root.SetAttributeValue(XNamespace.Xmlns + "xi", Namespace.XInclude);
 
             if ( Info != null )
                 root.Add( Info.ToXElement() );

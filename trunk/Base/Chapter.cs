@@ -20,7 +20,7 @@ namespace Jeebook.Base
 	{
         public static Chapter Create(System.IO.Stream stream)
         {
-            XDocument doc = XDocument.Load(System.Xml.XmlReader.Create(stream));
+            XDocument doc = XDocument.Load(System.Xml.XmlReader.Create(stream), LoadOptions.None);
             Chapter chap = new Chapter();
             chap.Paras = new List<Para>();
 
