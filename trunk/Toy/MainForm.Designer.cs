@@ -57,6 +57,7 @@ namespace Jeebook.Toy
             // 
             // TaskListView
             // 
+            this.TaskListView.AllowDrop = true;
             this.TaskListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2});
@@ -134,21 +135,21 @@ namespace Jeebook.Toy
             // AddFromBookUrlMenuItem
             // 
             this.AddFromBookUrlMenuItem.Name = "AddFromBookUrlMenuItem";
-            this.AddFromBookUrlMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.AddFromBookUrlMenuItem.Size = new System.Drawing.Size(145, 22);
             this.AddFromBookUrlMenuItem.Text = "Book Url";
             this.AddFromBookUrlMenuItem.Click += new System.EventHandler(this.AddFromBookUrlMenuItem_Click);
             // 
             // AddFromComicFolderMenuItem
             // 
             this.AddFromComicFolderMenuItem.Name = "AddFromComicFolderMenuItem";
-            this.AddFromComicFolderMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.AddFromComicFolderMenuItem.Size = new System.Drawing.Size(145, 22);
             this.AddFromComicFolderMenuItem.Text = "Comic Folder";
             this.AddFromComicFolderMenuItem.Click += new System.EventHandler(this.AddFromComicFolderMenuItem_Click);
             // 
             // AddFromTextFileMenuItem
             // 
             this.AddFromTextFileMenuItem.Name = "AddFromTextFileMenuItem";
-            this.AddFromTextFileMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.AddFromTextFileMenuItem.Size = new System.Drawing.Size(145, 22);
             this.AddFromTextFileMenuItem.Text = "Text File";
             this.AddFromTextFileMenuItem.Click += new System.EventHandler(this.AddFromTextFileMenuItem_Click);
             // 

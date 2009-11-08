@@ -51,7 +51,7 @@ namespace Jeebook.Reader
                 key.SetValue("", "Jeebook Document");
 
                 RegistryKey keySub = key.CreateSubKey("DefaultIcon");
-                keySub.SetValue("", System.Windows.Forms.Application.StartupPath + "Jeebook.ico");
+                keySub.SetValue("", System.Windows.Forms.Application.StartupPath + "\\Jeebook.ico");
                 keySub = key.CreateSubKey("shell\\open\\command");
                 keySub.SetValue("", "\"" + System.Windows.Forms.Application.ExecutablePath + "\" \"%1\"");
             }

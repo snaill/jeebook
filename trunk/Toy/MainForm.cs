@@ -44,8 +44,8 @@ namespace Jeebook.Toy
             string str = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             if (!str.EndsWith("\\"))
                 str += "\\";
-            _JBPath += str + "Jeebooks";
-            if (System.IO.Directory.Exists(_JBPath))
+            _JBPath += str + "Jeebooks\\";
+            if (!System.IO.Directory.Exists(_JBPath))
                 System.IO.Directory.CreateDirectory(_JBPath);
 		}
 		
@@ -126,16 +126,16 @@ namespace Jeebook.Toy
                             return;
                         }
 
-                        task = new BookTask(uri, strPlugin, _TManager.CreateTaskPath(uri), System.Windows.Forms.Application.StartupPath + "\\JBs\\");
+                        task = new BookTask(uri, strPlugin, _TManager.CreateTaskPath(uri), _JBPath);
                         break;
                     }
                 case TaskSource.ComicFolder:
                     {
-                        task = new ComicTask(UrlTextBox.Text, System.Windows.Forms.Application.StartupPath + "\\JBs\\");
+                        task = new ComicTask(uri, _JBPath);
                         break;
                     }
                 case TaskSource.TextFile:
-                    task = new TextTask(UrlTextBox.Text, System.Windows.Forms.Application.StartupPath + "\\JBs\\"); 
+                    task = new TextTask(uri, _JBPath); 
                     break;
                 default:
                     return;
