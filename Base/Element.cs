@@ -11,6 +11,13 @@ using System.Xml.Linq;
 
 namespace Jeebook.Base
 {
+    public class Namespace
+    {
+         public static XNamespace Docbook = "http://docbook.org/ns/docbook";
+         public static XNamespace XLink = "http://www.w3.org/1999/xlink";
+         public static XNamespace XInclude = "http://www.w3.org/2001/XInclude";
+    }
+
 	/// <summary>
 	/// Description of Element.
 	/// </summary>

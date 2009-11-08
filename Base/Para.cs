@@ -24,14 +24,25 @@ namespace Jeebook.Base
 		{
 			Para para = new Para();
             para.Elements = new List<Element>();
-            foreach (XElement elem in xe.Elements())
+            foreach (XNode node in xe.Nodes())
             {
-                if (elem.GetType() == typeof(XText))
-                    para.Elements.Add(Text.Create(xe));
-                else if (Link.LocalName == xe.Name.LocalName)
-                    para.Elements.Add(Link.Create(xe));
-                else if (MediaObject.LocalName == xe.Name.LocalName)
-                    para.Elements.Add(MediaObject.Create(xe));
+                if (node.NodeType == System.Xml.XmlNodeType.Text)
+                {
+                    Text text = Text.Create(node as XText);
+                    if ( null != text )
+                        para.Elements.Add(text);
+                }
+                else
+                {
+                    XElement elem = node as XElement;
+                    if (elem == null)
+                        continue;
+
+                    if (Link.LocalName == elem.Name.LocalName)
+                        para.Elements.Add(Link.Create(elem));
+                    else if (MediaObject.LocalName == elem.Name.LocalName)
+                        para.Elements.Add(MediaObject.Create(elem));
+                }
 
             }
 			return para;
@@ -41,7 +52,12 @@ namespace Jeebook.Base
         {
             XElement xe = new XElement("para", "");
             foreach (Element elem in Elements)
-                xe.Add(elem.ToXElement());
+            {
+                if (elem.GetType() == typeof(Text))
+                    xe.Add((elem as Text).ToXText());
+                else
+                    xe.Add(elem.ToXElement());
+            }
             return xe;
         }
 

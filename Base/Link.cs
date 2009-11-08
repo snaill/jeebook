@@ -16,39 +16,28 @@ namespace Jeebook.Base
 	/// </summary>
 	public class Link : Element
 	{
-		public Link()
-		{
-		}
+		public Link() {	}
+        public Link( string href, string value ) 
+        {
+            Href = href;
+            Value = value;        
+        }
 
         public static Link Create(XElement xe)
         {
-            return null;
+            Link link = new Link();
+            link.Href = xe.Attribute(Namespace.XLink + "href").Value;
+            link.Value = xe.Value;
+            return link;
         }
 
 		public string Href { get; set; }
-		public string Text { get; set; }
+		public string Value { get; set; }
 
         public XElement ToXElement()
         {
-            return null;
+            return new XElement( LocalName, new XAttribute( Namespace.XLink + "href", Href ), Value );
         }
-
-		public System.Xml.XmlElement ToXmlElement(System.Xml.XmlDocument doc)
-		{
-			if ( ( Href == null || Href == "" ) && ( Text == null || Text == "" ))
-				return null;
-			
-			System.Xml.XmlElement elem = doc.CreateElement("para");
-			System.Xml.XmlElement elem2 = doc.CreateElement("link");
-			System.Xml.XmlAttribute attr = doc.CreateAttribute("href", "xlink");
-			attr.Value = Href;
-
-			elem2.Attributes.Append( attr );
-			elem2.Value = Text;
-			
-			elem.AppendChild( elem2 );
-			return elem;
-		}
 
         public const string LocalName = "link";
 	}

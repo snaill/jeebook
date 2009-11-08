@@ -26,8 +26,7 @@ namespace Jeebook.Base
 
         public XElement ToXElement()
         {
-            XNamespace nsXInclude = "http://www.w3.org/2001/XInclude";
-            return new XElement(nsXInclude + LocalName,
+            return new XElement(Namespace.XInclude + LocalName,
                 new XAttribute("href", Href), Value);
         }
 
