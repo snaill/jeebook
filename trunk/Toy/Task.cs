@@ -12,7 +12,14 @@ using Altova.AltovaXML;
 namespace Jeebook.Toy
 {
 	public delegate void TaskStateChangedHandler( TaskStateChangedEventArgs args );
-		
+
+    public enum TaskSource
+    {
+        BookUrl,
+        ComicFolder,
+        TextFile
+    }
+
 	public enum TaskState 
 	{
 		Ready,
@@ -60,16 +67,10 @@ namespace Jeebook.Toy
 
 		protected Task()
 		{
-		}
-		
-		public virtual void Create(string url, string strJBPath)
-		{
-			Name = "New Task";
-			Uri = url;
-			State = TaskState.Ready;
-			JBPath = strJBPath;	
-		}
-		
+            Name = "New Task";
+            State = TaskState.Ready;
+        }
+
 		public bool Load(string strPath)
 		{
 			return false;

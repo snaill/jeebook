@@ -11,6 +11,12 @@ namespace Jeebook.Toy
 	{
 		public event TaskStateChangedHandler TaskStateChanged;
 
+        public ComicTask( string url, string strJBPath)
+		{
+			Uri = url;
+			JBPath = strJBPath;	
+		}
+
         public override void Run()
         {
             TaskStateChangedEventArgs args = new TaskStateChangedEventArgs(this);

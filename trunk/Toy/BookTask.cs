@@ -28,14 +28,15 @@ namespace Jeebook.Toy
         /// </summary>
         public string XmlPath = "";
 
-        public void Create(string uri, string strXsltPath, string strXmlPath, string strJBPath)
+        public BookTask(string uri, string strXsltPath, string strXmlPath, string strJBPath)
         {
+            Uri = uri;
+            JBPath = strJBPath;	
             XsltPath = strXsltPath;
             XmlPath = strXmlPath;
-            base.Create(uri, strJBPath);
         }
 
-		public override void  Run()
+ 		public override void  Run()
 		{
 			TaskStateChangedEventArgs args = new TaskStateChangedEventArgs(this);
 			args.Url = this.Uri;

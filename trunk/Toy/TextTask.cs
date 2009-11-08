@@ -13,6 +13,12 @@ namespace Jeebook.Toy
 
         const int MaxSize = UInt16.MaxValue;
 
+        public TextTask(string url, string strJBPath)
+		{
+			Uri = url;
+			JBPath = strJBPath;	
+		}
+
         public override void Run()
         {
             TaskStateChangedEventArgs args = new TaskStateChangedEventArgs(this);
