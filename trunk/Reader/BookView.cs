@@ -12,29 +12,62 @@ namespace Jeebook.Reader
 {
     public partial class BookView : Khendys.Controls.ExRichTextBox
     {
-        Book _book = null;
-        Proxy _proxy = null;
-        int _index = 0;
+        public event KeyEventHandler OnKeyEvent;
 
-        private const int WM_SETFOCUS = 0x7;
-        private const int WM_LBUTTONDOWN = 0x201;
-        private const int WM_LBUTTONUP = 0x202;
-        private const int WM_LBUTTONDBLCLK = 0x203;
-        private const int WM_RBUTTONDOWN = 0x204;
-        private const int WM_RBUTTONUP = 0x205;
-        private const int WM_RBUTTONDBLCLK = 0x206;
-        private const int WM_KEYDOWN = 0x0100;
-        private const int WM_KEYUP = 0x0101; 
+        public BookView() 
+        {
+            InitializeComponent();
 
-        public BookView( Book book, Proxy proxy )
+            Font = new System.Drawing.Font("System", 13);
+        }
+
+        public void Load( Chapter chap, Proxy proxy )
         {
             HideCaret(this.Handle);
 
             InitializeComponent();
-            _book = book;
-            _proxy = proxy;
 
-            Load(_index);
+            foreach (Para p in chap.Paras)
+            {
+                foreach (Element elem in p.Elements)
+                {
+                    if (elem.GetType() == typeof(Text))
+                        AppendTextAsRtf( (elem as Text).Value, this.Font ); 
+                    else if (elem.GetType() == typeof(Link))
+                    {
+                        Link link = (Link)elem;
+                        StringBuilder sb = new StringBuilder();
+                        sb.Append(RTF_HEADER);
+                        //sb.Append(@"{\rtf1\ansi\ansicpg1252\deff0\deflang" + System.Globalization.CultureInfo.InstalledUICulture.LCID);
+                        sb.Append(@"{\fonttbl{\f0\fnil\fcharset" + Font.GdiCharSet.ToString() + " " + EncodeAnsi(this.Font.Name) + ";}}");
+                        sb.Append(@"\f0\fs" + (int)Math.Round((2 * Font.SizeInPoints)));
+                        sb.Append("{\\field{\\*\\fldinst{HYPERLINK \"");
+                        sb.Append(link.Href);
+                        sb.Append("\" }}{\\fldrslt{\\cf2\\ul ");
+                        sb.Append(EncodeAnsi(link.Value));
+                        sb.Append("}}}");
+
+                       
+                        string str = sb.ToString();
+                        AppendRtf(sb.ToString());
+                    }
+                    else if (elem.GetType() == typeof(MediaObject))
+                    {
+                        MediaObject mo = (MediaObject)elem;
+                        foreach (ImageObject io in mo.Objects)
+                        {
+                            System.IO.Stream stream = proxy.GetFileStream(io.FileRef);
+                            System.Drawing.Image image = System.Drawing.Image.FromStream(stream);
+                            stream.Close();
+                            InsertImage(image);
+                        }
+                    }
+                }
+                AppendTextAsRtf("\r\n\r\n");
+            }
+
+            this.Select(0, 0);
+            this.ScrollToCaret();
         }
 
         public string EncodeUnicode(string str)
@@ -64,64 +97,18 @@ namespace Jeebook.Reader
             return sb.ToString();
         }
 
-        public void Load(int index)
-        {
-            if (index < 0 || index >= _book.Links.Count)
-                return;
-
-            System.IO.Stream stream = _proxy.GetFileStream(_book.Links[index].Href);
-            Chapter chap = Chapter.Create(stream);
-            stream.Close();
-
-            foreach (Para p in chap.Paras)
-            {
-                foreach (Element elem in p.Elements)
-                {
-                    if (elem.GetType() == typeof(Text))
-                        AppendText(((Text)elem).Value);
-                    else if (elem.GetType() == typeof(Link))
-                    {
-                        Link link = (Link)elem;
-                        StringBuilder sb = new StringBuilder();
-                        sb.Append(RTF_HEADER);
-                        //sb.Append(@"{\rtf1\ansi\ansicpg1252\deff0\deflang" + System.Globalization.CultureInfo.InstalledUICulture.LCID);
-                        sb.Append(@"{\fonttbl{\f0\fnil\fcharset" + Font.GdiCharSet.ToString() + " " + EncodeAnsi(this.Font.Name) + ";}}");
-                        sb.Append("{\\field{\\*\\fldinst{HYPERLINK \"");
-                        sb.Append(link.Href);
-                        sb.Append("\" }}{\\fldrslt{\\cf2\\ul ");
-                        sb.Append(EncodeAnsi("李明"));
-                        sb.Append("}}}");
-
-                       
-                        string str = sb.ToString();
-                        AppendRtf(sb.ToString());
-                    }
-                    else if (elem.GetType() == typeof(MediaObject))
-                    {
-                        MediaObject mo = (MediaObject)elem;
-                        foreach (ImageObject io in mo.Objects)
-                        {
-                            stream = _proxy.GetFileStream(io.FileRef);
-                            System.Drawing.Image image = System.Drawing.Image.FromStream(stream);
-                            stream.Close();
-                            InsertImage(image);
-                        }
-                    }
-                }
-                AppendTextAsRtf("\r\n\r\n");
-            }
-        }
-
         [DllImport("user32.dll")]
         public static extern System.Int32 HideCaret(System.IntPtr hwnd);
 
-        protected override void WndProc(ref System.Windows.Forms.Message m)
+        protected override void OnKeyDown(System.Windows.Forms.KeyEventArgs e)
         {
-            if (m.Msg == WM_SETFOCUS || m.Msg == WM_KEYDOWN || m.Msg == WM_KEYUP || m.Msg == WM_LBUTTONDOWN || m.Msg == WM_LBUTTONUP || m.Msg == WM_LBUTTONDBLCLK || m.Msg == WM_RBUTTONDOWN || m.Msg == WM_RBUTTONUP || m.Msg == WM_RBUTTONDBLCLK)
-            {
-                return;
-            }
-            base.WndProc(ref m);
-        } 
+            if (null != OnKeyEvent)
+                OnKeyEvent(e);
+        }
+
+        private void BookView_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(e.LinkText);
+        }
     }
 }

@@ -37,6 +37,7 @@
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ReadOnly = true;
+            this.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.BookView_LinkClicked);
             this.ResumeLayout(false);
 
         }
