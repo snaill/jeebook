@@ -71,12 +71,6 @@ namespace Jeebook.Reader
         private void MainForm_Load(object sender, EventArgs e)
         {
             RegFormatAndProtocol();
-
-            string[] args = Environment.GetCommandLineArgs();
-            if (args.Length == 1)
-                return;
-
-            MainPanel.Uri = args[1];
         }
 
         private void MainForm_DragEnter(object sender, DragEventArgs e)
@@ -97,6 +91,15 @@ namespace Jeebook.Reader
             catch { 
             
             }
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            string[] args = Environment.GetCommandLineArgs();
+            if (args.Length == 1)
+                return;
+
+            MainPanel.Uri = args[1];
         }
     }
 }
