@@ -797,7 +797,7 @@ namespace Khendys.Controls {
 
 			// \fcharset specifies the character set of a font in the font table.
 			// 0 is for ANSI.
-			_fontTable.Append(@"\fcharset0 ");
+			_fontTable.Append(@"\fcharset" + _font.GdiCharSet + " ");
 
 			// Append the name of the font
 			_fontTable.Append(_font.Name);

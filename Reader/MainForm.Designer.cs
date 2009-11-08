@@ -28,7 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.MainPanel = new Jeebook.Reader.MainPanel();
             this.SuspendLayout();
+            // 
+            // MainPanel
+            // 
+            this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MainPanel.Location = new System.Drawing.Point(0, 0);
+            this.MainPanel.Name = "MainPanel";
+            this.MainPanel.Size = new System.Drawing.Size(284, 262);
+            this.MainPanel.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -36,6 +45,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.MainPanel);
             this.Name = "MainForm";
             this.Text = "Jeebook Reader";
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -46,6 +56,8 @@
         }
 
         #endregion
+
+        private MainPanel MainPanel;
 
     }
 }

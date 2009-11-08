@@ -13,10 +13,15 @@ namespace Jeebook.Reader
         Proxy _proxy = null;
         int _index = 0;
 
-        public ComicView(MediaObject media, Proxy proxy)
+        public event KeyEventHandler OnKeyEvent;
+
+        public ComicView()
         {
             InitializeComponent();
+        }
 
+        public void Load(MediaObject media, Proxy proxy)
+        {
             _media = media;
             _proxy = proxy;
 
@@ -70,7 +75,7 @@ namespace Jeebook.Reader
         {
             switch (e.KeyCode)
             {
-                case System.Windows.Forms.Keys.Left:
+                case System.Windows.Forms.Keys.PageUp:
                     {
                         if (_index == 0)
                             return;
@@ -78,7 +83,7 @@ namespace Jeebook.Reader
                         Load(--_index);
                         break;
                     }
-                case System.Windows.Forms.Keys.Right:
+                case System.Windows.Forms.Keys.PageDown:
                     {
                         if (_index == _media.Objects.Count - 1)
                             return;
@@ -103,6 +108,10 @@ namespace Jeebook.Reader
                         break;
                     }
             }
+
+            if (OnKeyEvent != null)
+                OnKeyEvent(e);
+
             base.OnKeyDown(e);
         }
     }

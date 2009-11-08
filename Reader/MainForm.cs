@@ -19,53 +19,6 @@ namespace Jeebook.Reader
             InitializeComponent();
         }
 
-        private void LoadJeebook(string uri)
-        {
-            Proxy proxy = null;
-            if (uri.StartsWith("jeebook://", StringComparison.OrdinalIgnoreCase))
-            {
-                proxy = new HttpProxy(uri);
-            }
-            else if (System.IO.Directory.Exists(uri))
-            {
-                proxy = new FileProxy(uri);
-            }
-            else if (System.IO.File.Exists(uri) && uri.EndsWith(".jb", StringComparison.OrdinalIgnoreCase))
-            {
-                proxy = new ZipProxy(uri);
-            }
-            else
-                return;
-
-            System.IO.Stream stream = null;
-            try
-            {
-                //
-                stream = proxy.GetFileStream("index.xml");
-                Book book = Book.Create(stream);
-                stream.Close();
-
-                if (book.MediaObject != null)
-                {
-                    ComicView cv = new ComicView(book.MediaObject, proxy);
-                    this.Controls.Add(cv);
-                    cv.Focus();
-                }
-                else 
-                {
-                    BookView bv = new BookView(book, proxy);
-                    this.Controls.Add(bv);
-                    bv.Focus();
-                }
-            }
-            catch (Exception ex)
-            {
-                if (stream != null)
-                    stream.Close();
-                MessageBox.Show(ex.Message);
-            }
-        }
-
         private void RegFormatAndProtocol()
         {
             if ( null != Registry.ClassesRoot.OpenSubKey(".jb") 
@@ -123,7 +76,7 @@ namespace Jeebook.Reader
             if (args.Length == 1)
                 return;
 
-            LoadJeebook(args[1]);
+            MainPanel.Uri = args[1];
         }
 
         private void MainForm_DragEnter(object sender, DragEventArgs e)
@@ -139,7 +92,7 @@ namespace Jeebook.Reader
             try
             {
                 string strFile = ((System.Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
-                LoadJeebook(strFile);
+                MainPanel.Uri = strFile;
             }
             catch { 
             
