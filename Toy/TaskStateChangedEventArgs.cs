@@ -21,9 +21,9 @@ namespace Jeebook.Toy
 		public Task	Current = null;
 		
 		/// <summary>
-		/// 当前正在处理的url
+		/// 当前正在处理的资源
 		/// </summary>
-		public string Url = "";
+		public string CurrentUri = "";
 		
 		/// <summary>
 		/// 需要处理的文件数
@@ -66,11 +66,11 @@ namespace Jeebook.Toy
             case TaskState.Analysing: return "Analysing...";
 			case TaskState.Failed: return "Failed : " + ErrorMassage; 
 			case TaskState.Downloading:
-				return string.Format("[{0}/{1}] Downloading : {2}", FinishedCount, TotalCount, Url );
+                return string.Format("[{0}/{1}] Downloading : {2}", FinishedCount, TotalCount, CurrentUri);
 			case TaskState.ToXHtml:
-				return string.Format("[{0}/{1}] Convert to XHTML : {2}", FinishedCount, TotalCount, Url );
+                return string.Format("[{0}/{1}] Convert to XHTML : {2}", FinishedCount, TotalCount, CurrentUri);
 			case TaskState.ToJeebook:
-				return string.Format("[{0}/{1}] Creating Jeebook XML : {2}", FinishedCount, TotalCount, Url );
+                return string.Format("[{0}/{1}] Creating Jeebook XML : {2}", FinishedCount, TotalCount, CurrentUri);
 			default:
 				System.Diagnostics.Debug.Assert( false );
 				return "";

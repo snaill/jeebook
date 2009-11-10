@@ -28,7 +28,7 @@ namespace Jeebook.Base
         {
             ImageObject io = new ImageObject();
 
-            XElement elem = xe.Element("imagedata");
+            XElement elem = xe.Element(Namespace.Docbook + "imagedata");
             io.FileRef = elem.Attribute("fileref").Value;
             io.Value = elem.Value;
 
@@ -37,8 +37,8 @@ namespace Jeebook.Base
 
 		public XElement ToXElement()
 		{
-            return new XElement( LocalName, 
-                new XElement( "imagedata", 
+            return new XElement( Namespace.Docbook + LocalName,
+                new XElement(Namespace.Docbook + "imagedata", 
                     new XAttribute( "fileref", FileRef ), Value ) );
 
 		}

@@ -43,6 +43,9 @@ namespace Jeebook.Reader
 
         public void ResizeImageBox(System.Drawing.Image image)
         {
+            if (image == null)
+                return;
+
             //
             if (this.Width < image.Width)
             {

@@ -22,7 +22,7 @@ namespace Jeebook.Base
 
         public XElement ToXElement()
         {
-            XElement xe = new XElement(LocalName);
+            XElement xe = new XElement(Namespace.Docbook + LocalName);
             foreach ( ImageObject io in Objects )
             {
                 xe.Add(io.ToXElement());

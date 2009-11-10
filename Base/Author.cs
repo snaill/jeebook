@@ -25,16 +25,16 @@ namespace Jeebook.Base
 		public static Author Create(XElement xe)
 		{
 			Author author = new Author();
-			author.OtherName = xe.Element("personname").Element("othername").Value;
+            author.OtherName = xe.Element(Namespace.Docbook + "personname").Element(Namespace.Docbook + "othername").Value;
 			
 			return author;
 		}
 		
 		public XElement ToXElement()
 		{
-            return new XElement(LocalName,
-                new XElement("personname",
-                    new XElement("othername", OtherName)));
+            return new XElement(Namespace.Docbook + LocalName,
+                new XElement(Namespace.Docbook + "personname",
+                    new XElement(Namespace.Docbook + "othername", OtherName)));
 		}
 
         public const string LocalName = "author";

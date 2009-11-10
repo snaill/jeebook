@@ -192,5 +192,18 @@ namespace Jeebook.Toy
             }
         }
 
+        private void TaskListView_DoubleClick(object sender, EventArgs e)
+        {
+            if (TaskListView.SelectedItems == null && TaskListView.SelectedItems.Count <= 0)
+                return;
+
+            Task task = (Task)TaskListView.SelectedItems[0].Tag;
+            if (task.State != TaskState.Finished)
+                return;
+
+            System.Diagnostics.Process.Start(task.JBPath);
+               
+        }
+
 	}
 }
