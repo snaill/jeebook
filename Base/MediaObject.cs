@@ -12,7 +12,7 @@ namespace Jeebook.Base
         {
             MediaObject mo = new MediaObject();
             mo.Objects = new List<ImageObject>();
-            foreach (XElement elem in xe.Elements(ImageObject.LocalName))
+            foreach (XElement elem in xe.Elements(ImageObject.Name))
             {
                 ImageObject io = ImageObject.Create(elem);
                 mo.Objects.Add(io);
@@ -22,7 +22,7 @@ namespace Jeebook.Base
 
         public XElement ToXElement()
         {
-            XElement xe = new XElement(Namespace.Docbook + LocalName);
+            XElement xe = new XElement(Name);
             foreach ( ImageObject io in Objects )
             {
                 xe.Add(io.ToXElement());
@@ -30,7 +30,7 @@ namespace Jeebook.Base
             return xe;
         }
 
-        public const string LocalName = "mediaobject";
+        public static XName Name = Namespace.Docbook + "mediaobject";
         public List<ImageObject> Objects { get; set; }
     }
 }

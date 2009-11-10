@@ -32,12 +32,12 @@ namespace Jeebook.Base
 		
 		public XElement ToXElement()
 		{
-            return new XElement(Namespace.Docbook + LocalName,
+            return new XElement( Name,
                 new XElement(Namespace.Docbook + "personname",
                     new XElement(Namespace.Docbook + "othername", OtherName)));
 		}
 
-        public const string LocalName = "author";
+        public static XName Name = Namespace.Docbook + "author";
 
         public string OtherName { get; set; }
 	}

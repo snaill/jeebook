@@ -37,13 +37,13 @@ namespace Jeebook.Base
 
 		public XElement ToXElement()
 		{
-            return new XElement( Namespace.Docbook + LocalName,
+            return new XElement( Name,
                 new XElement(Namespace.Docbook + "imagedata", 
                     new XAttribute( "fileref", FileRef ), Value ) );
 
 		}
 
-        public const string LocalName = "imageobject";
+        public static XName Name = Namespace.Docbook + "imageobject";
 
         public string FileRef { get; set; }
         public string Value { get; set; }

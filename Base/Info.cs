@@ -36,13 +36,13 @@ namespace Jeebook.Base
 
         public XElement ToXElement()
 		{
-            return new XElement(Namespace.Docbook + LocalName,
+            return new XElement(Name,
                 new XElement(Namespace.Docbook + "title", Title),
                 Author.ToXElement(),
                 new XElement(Namespace.Docbook + "bibliosource", BiblioSource));
 		}
 
-        public const string LocalName = "info";
+        public static XName Name = Namespace.Docbook + "info";
 
         public string Title { get; set; }
         public string BiblioSource { get; set; }
