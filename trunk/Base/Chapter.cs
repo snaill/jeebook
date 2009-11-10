@@ -30,11 +30,11 @@ namespace Jeebook.Base
                 {
                     chap.Paras.Add( Para.Create( xe ));
                 }
-                else if ("title" == xe.Name.LocalName)
+                else if (Namespace.Docbook + "title" == xe.Name)
                 {
                     chap.Title = xe.Value;
                 }
-                else if (MediaObject.LocalName == xe.Name.LocalName)
+                else if (MediaObject.Name == xe.Name)
                 {
                     chap.MediaObject = MediaObject.Create(xe);
                 }

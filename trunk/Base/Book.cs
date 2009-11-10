@@ -26,15 +26,15 @@ namespace Jeebook.Base
 
             foreach (XElement xe in doc.Root.Elements())
             {
-                if (Info.LocalName == xe.Name.LocalName)
+                if (Info.Name == xe.Name)
                 {
                     book.Info = Info.Create(xe);
                 }
-                else if (ChapterLink.LocalName == xe.Name.LocalName)
+                else if (ChapterLink.Name == xe.Name)
                 {
                     book.Links.Add(ChapterLink.Create(xe)); 
                 }
-                else if (MediaObject.LocalName == xe.Name.LocalName)
+                else if (MediaObject.Name == xe.Name)
                 {
                     book.MediaObject = MediaObject.Create(xe);
                 }

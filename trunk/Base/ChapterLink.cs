@@ -26,11 +26,11 @@ namespace Jeebook.Base
 
         public XElement ToXElement()
         {
-            return new XElement(Namespace.XInclude + LocalName,
-                new XAttribute("href", Href), Value);
+            return new XElement(Name, new XAttribute("href", Href), Value);
         }
 
-        public const string LocalName = "include";
+        public static XName Name = Namespace.XInclude + "include";
+
         public string Href { get; set; }
         public string Value { get; set; }
     }

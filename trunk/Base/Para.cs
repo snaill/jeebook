@@ -43,9 +43,9 @@ namespace Jeebook.Base
                     if (elem == null)
                         continue;
 
-                    if (Link.LocalName == elem.Name.LocalName)
+                    if (Link.Name == elem.Name)
                         para.Elements.Add(Link.Create(elem));
-                    else if (MediaObject.LocalName == elem.Name.LocalName)
+                    else if (MediaObject.Name == elem.Name)
                         para.Elements.Add(MediaObject.Create(elem));
                 }
 
