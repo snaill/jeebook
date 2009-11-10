@@ -65,11 +65,12 @@ namespace Jeebook.Toy
             this.TaskListView.FullRowSelect = true;
             this.TaskListView.Location = new System.Drawing.Point(0, 39);
             this.TaskListView.Name = "TaskListView";
-            this.TaskListView.Size = new System.Drawing.Size(419, 233);
+            this.TaskListView.Size = new System.Drawing.Size(419, 210);
             this.TaskListView.SmallImageList = this.TaskStateImageList;
             this.TaskListView.TabIndex = 0;
             this.TaskListView.UseCompatibleStateImageBehavior = false;
             this.TaskListView.View = System.Windows.Forms.View.Details;
+            this.TaskListView.DoubleClick += new System.EventHandler(this.TaskListView_DoubleClick);
             this.TaskListView.DragDrop += new System.Windows.Forms.DragEventHandler(this.TaskListView_DragDrop);
             this.TaskListView.DragEnter += new System.Windows.Forms.DragEventHandler(this.TaskListView_DragEnter);
             // 
@@ -97,7 +98,7 @@ namespace Jeebook.Toy
             // 
             // StatusStrip
             // 
-            this.StatusStrip.Location = new System.Drawing.Point(0, 272);
+            this.StatusStrip.Location = new System.Drawing.Point(0, 249);
             this.StatusStrip.Name = "StatusStrip";
             this.StatusStrip.Size = new System.Drawing.Size(419, 22);
             this.StatusStrip.TabIndex = 3;
@@ -135,21 +136,21 @@ namespace Jeebook.Toy
             // AddFromBookUrlMenuItem
             // 
             this.AddFromBookUrlMenuItem.Name = "AddFromBookUrlMenuItem";
-            this.AddFromBookUrlMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.AddFromBookUrlMenuItem.Size = new System.Drawing.Size(142, 22);
             this.AddFromBookUrlMenuItem.Text = "Book Url";
             this.AddFromBookUrlMenuItem.Click += new System.EventHandler(this.AddFromBookUrlMenuItem_Click);
             // 
             // AddFromComicFolderMenuItem
             // 
             this.AddFromComicFolderMenuItem.Name = "AddFromComicFolderMenuItem";
-            this.AddFromComicFolderMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.AddFromComicFolderMenuItem.Size = new System.Drawing.Size(142, 22);
             this.AddFromComicFolderMenuItem.Text = "Comic Folder";
             this.AddFromComicFolderMenuItem.Click += new System.EventHandler(this.AddFromComicFolderMenuItem_Click);
             // 
             // AddFromTextFileMenuItem
             // 
             this.AddFromTextFileMenuItem.Name = "AddFromTextFileMenuItem";
-            this.AddFromTextFileMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.AddFromTextFileMenuItem.Size = new System.Drawing.Size(142, 22);
             this.AddFromTextFileMenuItem.Text = "Text File";
             this.AddFromTextFileMenuItem.Click += new System.EventHandler(this.AddFromTextFileMenuItem_Click);
             // 
@@ -186,9 +187,9 @@ namespace Jeebook.Toy
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(419, 294);
+            this.ClientSize = new System.Drawing.Size(419, 271);
             this.Controls.Add(this.TaskListView);
             this.Controls.Add(this.MainToolStrip);
             this.Controls.Add(this.StatusStrip);

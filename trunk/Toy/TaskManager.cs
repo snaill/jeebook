@@ -89,7 +89,7 @@ namespace Jeebook.Toy
 			Loop.Priority = ThreadPriority.Normal;
 			Loop.Start();
 		}
-			
+
 		/// <summary>
 		/// 添加任务到任务列表
 		/// </summary>

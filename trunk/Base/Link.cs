@@ -36,7 +36,7 @@ namespace Jeebook.Base
 
         public XElement ToXElement()
         {
-            return new XElement( LocalName, new XAttribute( Namespace.XLink + "href", Href ), Value );
+            return new XElement(Namespace.Docbook + LocalName, new XAttribute(Namespace.XLink + "href", Href), Value);
         }
 
         public const string LocalName = "link";

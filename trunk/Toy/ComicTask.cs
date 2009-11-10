@@ -26,19 +26,20 @@ namespace Jeebook.Toy
             this.Name = title;
 
             TaskStateChangedEventArgs args = new TaskStateChangedEventArgs(this);
-            args.Url = this.Uri;
+            args.CurrentUri = this.Uri;
             State = TaskState.Analysing;
             if (TaskStateChanged != null)
                 TaskStateChanged(args);
 
-            ZipFile zf = ZipFile.Create(JBPath + title + ".jb");
+            JBPath += title + ".jb";
+            ZipFile zf = ZipFile.Create(JBPath); 
             zf.BeginUpdate();
             zf.AddDirectory("images");
             
             MediaObject mo = new MediaObject();
             mo.Objects = new List<ImageObject>();
 
-            string[] files = System.IO.Directory.GetFiles(args.Url, "*.jpg");
+            string[] files = System.IO.Directory.GetFiles(this.Uri, "*.jpg");
             foreach ( string file in files )
             {
                 string fn = "images\\" + file.Substring(file.LastIndexOf('\\') + 1);

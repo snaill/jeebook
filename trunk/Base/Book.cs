@@ -67,7 +67,9 @@ namespace Jeebook.Base
                 root.Add(MediaObject.ToXElement());
 
             XDocument doc = new XDocument(root);
-            doc.Save(strPath);
+            System.IO.StreamWriter sw = new System.IO.StreamWriter( strPath, false, System.Text.Encoding.Unicode );
+            doc.Save(sw);
+            sw.Close();
 		}
 	}
 }

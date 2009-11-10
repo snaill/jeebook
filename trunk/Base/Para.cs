@@ -19,6 +19,11 @@ namespace Jeebook.Base
 	public class Para : Element
 	{
 		public Para() {	}
+        public Para(string str) 
+        {
+            this.Elements = new List<Element>();
+            this.Elements.Add(new Text(str));
+        }
 			
 		public static Para Create(XElement xe )
 		{
@@ -50,7 +55,7 @@ namespace Jeebook.Base
 
         public System.Xml.Linq.XElement ToXElement()
         {
-            XElement xe = new XElement("para", "");
+            XElement xe = new XElement(Namespace.Docbook + "para", "");
             foreach (Element elem in Elements)
             {
                 if (elem.GetType() == typeof(Text))

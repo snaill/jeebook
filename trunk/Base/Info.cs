@@ -27,19 +27,19 @@ namespace Jeebook.Base
 		public static Info Create( XElement xe )
 		{
 			Info info = new Info();
-			info.Title = xe.Element("title").Value;
-			info.BiblioSource = xe.Element("bibliosource").Value;
-			info.Author = Author.Create( xe.Element("author") );
+            info.Title = xe.Element(Namespace.Docbook + "title").Value;
+            info.BiblioSource = xe.Element(Namespace.Docbook + "bibliosource").Value;
+            info.Author = Author.Create(xe.Element(Namespace.Docbook + "author"));
 			
 			return info;
 		}
 
         public XElement ToXElement()
 		{
-            return new XElement(LocalName,
-                new XElement("title", Title),
+            return new XElement(Namespace.Docbook + LocalName,
+                new XElement(Namespace.Docbook + "title", Title),
                 Author.ToXElement(),
-                new XElement("bibliosource", BiblioSource));
+                new XElement(Namespace.Docbook + "bibliosource", BiblioSource));
 		}
 
         public const string LocalName = "info";

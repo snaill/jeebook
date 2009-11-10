@@ -39,7 +39,7 @@ namespace Jeebook.Toy
  		public override void  Run()
 		{
 			TaskStateChangedEventArgs args = new TaskStateChangedEventArgs(this);
-			args.Url = this.Uri;
+            args.CurrentUri = this.Uri;
 			State = TaskState.Downloading;
 			if ( TaskStateChanged != null )
 				TaskStateChanged( args );

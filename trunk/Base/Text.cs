@@ -8,6 +8,12 @@ namespace Jeebook.Base
 {
     public class Text : Element
     {
+        public Text() { }
+        public Text(string value)
+        {
+            Value = value;
+        }
+
         public static Text Create(XText xe)
         {
             string str = Text.Format(xe.Value);
