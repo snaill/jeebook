@@ -7,6 +7,8 @@
 	this.Toolbar.Delete = '删除';
 	this.Toolbar.MainSite = '主站';
 	this.Toolbar.BlogSite = '博客';
+	this.Toolbar.CodeSite = '源码';
+	this.Toolbar.DownloadSite = '在线阅读，请点击下载阅读器...';
 	this.Toolbar.Help = '帮助';
 	
 	this.EmptyText = {};

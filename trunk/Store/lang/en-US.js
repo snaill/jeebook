@@ -7,6 +7,8 @@
 	this.Toolbar.Delete = 'Delete';
 	this.Toolbar.MainSite = 'Home';
 	this.Toolbar.BlogSite = 'Blog';
+	this.Toolbar.CodeSite = 'Source';
+	this.Toolbar.DownloadSite = 'Please download Reader for read online...';
 	this.Toolbar.Help = 'Help';
 
 	this.EmptyText = {};
