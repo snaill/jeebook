@@ -15,7 +15,8 @@ Ext.app.StoreGrid = function() {
 		id : 'StoreGrid_Id',
 		store: store,
 		columns: [
-			{header: "Name", width: 160, sortable: true, renderer: this.renderName, dataIndex: 'name'},
+			{width: 16, renderer: this.formatIcon, dataIndex: 'extension'},
+			{header: "Name", width: 160, sortable: true, dataIndex: 'name'},
 			{header: "Size", width: 75, sortable: true, renderer: this.formatSize, dataIndex: 'size', align : 'right' },
 			{header: "Upload time", width: 85, sortable: true, dataIndex: 'time'}
 		],
@@ -44,7 +45,7 @@ Ext.app.StoreGrid = function() {
 		region:'center'
 	});
 
-	this.on('cellclick', this.onCellClick, this );
+	this.on('rowdblclick', this.onRowdblclick, this );
 };
 
 Ext.extend(Ext.app.StoreGrid, Ext.grid.GridPanel, {
@@ -71,12 +72,16 @@ Ext.extend(Ext.app.StoreGrid, Ext.grid.GridPanel, {
 	onLoadException : function( o, options, response, e )	{
 		this.store.removeAll();
 	},
-	onCellClick : function( grid, rowIndex, columnIndex, e ) {
+	onRowdblclick : function( grid, rowIndex, e ) {
+		window.location='jeebook://www.jeebook.com/store/ashx/Get.ashx?path=' 
+						+ Ext.app.StoreTree.getObj().getCurrentPath() + '#' 
+						+ grid.store.getAt(rowIndex).get('name') + grid.store.getAt(rowIndex).get('extension');
 	},
-	renderName : function(value, p, record) {
-		return String.format('<b><a href="ashx/Download.ashx?id={1}&name={2}">{0}</a></b>',
-            value, encodeURIComponent(record.data.id), encodeURIComponent(record.data.name));
-	},	
+	formatIcon : function( extension )	{
+		if ( extension == '.jb' )
+			return '<img src="" alt="Jeebook Document" />';
+		return '<img src="" alt="Unknown Document" />';
+	},
 	formatSize : function( size )	{
 		return Ext.util.Format.fileSize(size);
 	},
@@ -88,7 +93,3 @@ Ext.extend(Ext.app.StoreGrid, Ext.grid.GridPanel, {
 Ext.app.StoreGrid.getObj = function(){
 	return Ext.getCmp('StoreGrid_Id');
 };
-
-Ext.app.StoreGrid.Download = function(id, name){
-	 window.location='ashx/Download.ashx?id=' + id + '&name=' + name;
-}
