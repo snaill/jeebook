@@ -110,5 +110,21 @@ namespace Jeebook.FileServer
 
             return strJson;
         }
+
+        public string Get(string strDir)
+        {
+            if (strDir.IndexOf('#') < 0)
+                return strDir;
+
+            string[] str = strDir.Split('#');
+            string strPath = str[0].Insert( str[0].LastIndexOf("\\"), DirPrefix );
+            if (!System.IO.Directory.Exists(strPath))
+            {
+                ICSharpCode.SharpZipLib.Zip.FastZip fz = new ICSharpCode.SharpZipLib.Zip.FastZip();
+                fz.ExtractZip(str[0], strPath, "*.*");
+            }
+
+            return strPath + "\\" + str[1];
+         }
     }
 }
