@@ -5,9 +5,10 @@
  * 
  * http://www.jeebook.com
  */
-Ext.BLANK_IMAGE_URL = '../extjs/resources/images/default/s.gif';
+Ext.BLANK_IMAGE_URL = 'ext-3.0.0/resources/images/default/s.gif';
 Ext.app.Resource = new Object();
 Ext.app.UserState = null;
+Ext.action = new Object();
 
 Ext.onReady(function(){
 
@@ -25,6 +26,8 @@ Ext.onReady(function(){
 	else 
 		Ext.app.Resource = new Ext.app.en_US(); 
 
+	Ext.action = new Ext.app.Actions();
+	
 	var header = new Ext.Panel({
 		layout 	: 'border',
 		region : 'north',

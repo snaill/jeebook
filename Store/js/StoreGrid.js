@@ -32,15 +32,15 @@ Ext.app.StoreGrid = function() {
             }
         },
 
-		bbar : new Ext.PagingToolbar({
-			pageSize: 25,
-			store: store, 
-			displayInfo: true,
-			displayMsg: 'Displaying {0} - {1} of {2}',
-			emptyMsg: 'No data to display'
-		}),
+ 		// bbar : new Ext.PagingToolbar({
+			// pageSize: 25,
+			// store: store, 
+			// displayInfo: true,
+			// displayMsg: 'Displaying {0} - {1} of {2}',
+			// emptyMsg: 'No data to display'
+		// }), 
 		stripeRows: true,
-		border:false,
+		border:true,
 		region:'center'
 	});
 
