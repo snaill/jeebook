@@ -6,6 +6,8 @@ using Newtonsoft.Json;
 
 namespace Jeebook.FileServer
 {
+//    public delegate void KeyEventHandler(System.Windows.Forms.KeyEventArgs args);
+
     public class FileServerBase
     {
         const string DirPrefix = "__";
@@ -34,6 +36,9 @@ namespace Jeebook.FileServer
             if (!System.IO.File.Exists(strJson))
             {
                 string[] strDirs = System.IO.Directory.GetDirectories(strPath);
+                if (strDirs.Length == 0)
+                    return null;
+
                 System.IO.TextWriter tw = new System.IO.StreamWriter(strJson);
                 JsonWriter jw = new JsonTextWriter(tw);
                 jw.WriteStartObject();
@@ -76,6 +81,9 @@ namespace Jeebook.FileServer
             if (!System.IO.File.Exists(strJson))
             {
                 string[] strFiles = System.IO.Directory.GetFiles(strPath);
+                if (strFiles.Length == 0)
+                    return null;
+
                 System.IO.TextWriter tw = new System.IO.StreamWriter(strJson);
                 JsonWriter jw = new JsonTextWriter(tw);
                 jw.WriteStartObject();
@@ -93,11 +101,14 @@ namespace Jeebook.FileServer
                  	
                     jw.WriteStartObject();
                     jw.WritePropertyName("name");
-                    jw.WriteValue(fi.Name);
+                    jw.WriteValue(fi.Name.Substring(0, fi.Name.Length - fi.Extension.Length));
                     jw.WritePropertyName("size");
                     jw.WriteValue(fi.Length);
                     jw.WritePropertyName("time");
-                    jw.WriteValue(fi.CreationTimeUtc);
+                    jw.WriteValue(string.Format("{0}-{1}-{2} {3}:{4}:{5}", fi.CreationTimeUtc.Year.ToString("D4"),
+                        fi.CreationTimeUtc.Month.ToString("D2"), fi.CreationTimeUtc.Day.ToString("D2"),
+                        fi.CreationTimeUtc.Hour.ToString("D2"), fi.CreationTimeUtc.Minute.ToString("D2"),
+                        fi.CreationTimeUtc.Second.ToString("D2")));
                     jw.WritePropertyName("extension");
                     jw.WriteValue(fi.Extension);
                     jw.WriteEndObject();
