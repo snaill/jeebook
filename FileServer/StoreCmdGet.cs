@@ -15,9 +15,19 @@ namespace Jeebook.Store
 
             //
             FileServerBase fs = new FileServerBase(context.Server.MapPath("../data/"));
+            fs.OnCheckCacheFolder += OnCheckCacheFolder;
             string dirs = fs.Get(strPath);
 
             context.Response.WriteFile(dirs);
+        }
+
+        public void OnCheckCacheFolder(string strSource, string strDir, string strFn)
+        {
+            if (!System.IO.Directory.Exists(strDir))
+            {
+                ICSharpCode.SharpZipLib.Zip.FastZip fz = new ICSharpCode.SharpZipLib.Zip.FastZip();
+                fz.ExtractZip(strSource, strDir, "*.*");
+            }
         }
 
         public bool IsReusable

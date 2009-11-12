@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace Jeebook.FileServer
 {
-//    public delegate void KeyEventHandler(System.Windows.Forms.KeyEventArgs args);
+    public delegate void CheckCacheFolder(string strSource, string strDir, string strFn);
 
     public class FileServerBase
     {
@@ -16,6 +16,8 @@ namespace Jeebook.FileServer
         const string FileCacheName = "files.json";
 
     	string m_strBase = "";
+
+        public event CheckCacheFolder OnCheckCacheFolder = null;
 
         public FileServerBase(string strBase)
         {
@@ -129,11 +131,8 @@ namespace Jeebook.FileServer
 
             string[] str = strDir.Split('#');
             string strPath = str[0].Insert( str[0].LastIndexOf("\\"), DirPrefix );
-            if (!System.IO.Directory.Exists(strPath))
-            {
-                ICSharpCode.SharpZipLib.Zip.FastZip fz = new ICSharpCode.SharpZipLib.Zip.FastZip();
-                fz.ExtractZip(str[0], strPath, "*.*");
-            }
+            if (OnCheckCacheFolder != null)
+                OnCheckCacheFolder(str[0], strPath, str[1]);
 
             return strPath + "\\" + str[1];
          }
