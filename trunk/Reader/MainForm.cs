@@ -61,7 +61,7 @@ namespace Jeebook.Reader
             {
                 key = Registry.ClassesRoot.CreateSubKey("jeebook");
                 key.SetValue("", "URL:Jeebook Protocol");
-                key.SetValue("URL Procotol", "");
+                key.SetValue("URL Protocol", "");
 
                 key = key.CreateSubKey("shell\\open\\command");
                 key.SetValue("", "\"" + System.Windows.Forms.Application.ExecutablePath + "\" \"%1\"");
