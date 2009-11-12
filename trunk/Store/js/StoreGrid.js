@@ -9,16 +9,30 @@
 Ext.app.StoreGrid = function() {
 
 	var store = new Ext.data.Store({
-		reader: new Ext.app.StoreGridReader()
+		reader: new Ext.data.JsonReader({
+			// metadata configuration options:
+		//	idProperty: 'id'          
+			root: 'data',             
+		//	totalProperty: 'results', 
+			
+			// the fields config option will internally create an Ext.data.Record
+			// constructor that provides mapping for reading the record data objects
+			fields: [
+				{name: 'name'},
+				{name: 'size'},
+				{name: 'time', type: 'date', dateFormat:'Y-m-d H:i:s'},
+				{name: 'extension'}
+			]    
+		})
 	});
 	Ext.app.StoreGrid.superclass.constructor.call(this, {
 		id : 'StoreGrid_Id',
 		store: store,
 		columns: [
 			{width: 16, renderer: this.formatIcon, dataIndex: 'extension'},
-			{header: "Name", width: 160, sortable: true, dataIndex: 'name'},
-			{header: "Size", width: 75, sortable: true, renderer: this.formatSize, dataIndex: 'size', align : 'right' },
-			{header: "Upload time", width: 85, sortable: true, dataIndex: 'time'}
+			{header: "Name", width: 200, sortable: true, dataIndex: 'name'},
+			{header: "Size", width: 60, sortable: true, renderer: this.formatSize, dataIndex: 'size', align : 'right' },
+			{header: "Upload time", width: 70, sortable: true, xtype: 'datecolumn', format:'Y-m-d H:i:s', dataIndex: 'time'}
 		],
 		viewConfig: {
             forceFit:true,
@@ -41,7 +55,10 @@ Ext.app.StoreGrid = function() {
 			// emptyMsg: 'No data to display'
 		// }), 
 		stripeRows: true,
-		border:true,
+	//	frame : true,
+		margins     : '3 3 3 0',
+		cmargins    : '3 3 3 3',
+	//	border:false,
 		region:'center'
 	});
 
@@ -84,6 +101,9 @@ Ext.extend(Ext.app.StoreGrid, Ext.grid.GridPanel, {
 	},
 	formatSize : function( size )	{
 		return Ext.util.Format.fileSize(size);
+	},
+	formatDate : function( date )	{
+		return date.toLocaleString()
 	},
 	refresh : function()	{
 		this.load( Ext.app.StoreTree.getObj().getCurrentPath() );

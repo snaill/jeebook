@@ -12,7 +12,7 @@ Ext.app.StoreGridReader = function() {
     var recordType = [
 		{name: 'name'},
 		{name: 'size'},
-		{name: 'time'},
+		{name: 'time', type: 'date'},
 		{name: 'extension'}
 	];
 
