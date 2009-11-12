@@ -41,7 +41,7 @@ Ext.onReady(function(){
 				html : '<img src=\"images/logo.png\" />'
 			}, 
 			new Ext.Panel({
-				region	: 'east',
+				region	: 'center',
 				layout	: 'table',
 				width 	: 468,
 				border	: false,
@@ -59,7 +59,7 @@ Ext.onReady(function(){
 						el : 'adbox'
 					}
 				]
-			}),
+			})/* ,
 			new Ext.Panel({
 				region	: 'center',
 				layout	: 'table',
@@ -74,7 +74,7 @@ Ext.onReady(function(){
 					}, 
 					new Ext.app.SearchPanel()
 				]
-			})
+			}) */
 		]
 	});
 
