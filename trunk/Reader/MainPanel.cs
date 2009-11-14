@@ -93,6 +93,8 @@ namespace Jeebook.Reader
             if (index < 0 || index >= _book.Links.Count)
                 return;
 
+            this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+
             Reset();
 
             System.IO.Stream stream = _proxy.GetFileStream(_book.Links[index].Href);
@@ -112,6 +114,8 @@ namespace Jeebook.Reader
                 BookView.Focus();
             }
             _index = index;
+
+            this.Cursor = System.Windows.Forms.Cursors.Default;
         }
 
         void OnKeyEvent(System.Windows.Forms.KeyEventArgs e)

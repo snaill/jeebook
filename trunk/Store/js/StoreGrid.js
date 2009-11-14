@@ -9,6 +9,8 @@
 Ext.app.StoreGrid = function() {
 
 	var store = new Ext.data.Store({
+		url: 'ashx/GetFiles.ashx',
+		baseParam: { path:'aa'},
 		reader: new Ext.data.JsonReader({
 			// metadata configuration options:
 		//	idProperty: 'id'          
@@ -55,10 +57,8 @@ Ext.app.StoreGrid = function() {
 			// emptyMsg: 'No data to display'
 		// }), 
 		stripeRows: true,
-	//	frame : true,
 		margins     : '3 3 3 0',
 		cmargins    : '3 3 3 3',
-	//	border:false,
 		region:'center'
 	});
 
@@ -68,31 +68,15 @@ Ext.app.StoreGrid = function() {
 Ext.extend(Ext.app.StoreGrid, Ext.grid.GridPanel, {
 	load : function(path)	{
 		var url = 'ashx/GetFiles.ashx?path=' + encodeURIComponent(path);
-		var conn = new Ext.data.Connection({
-			url : url
-		});
-	
-		this.store.proxy = new Ext.data.HttpProxy( conn );
-		this.store.proxy.on('loadexception', this.onLoadException, this );
+		this.store.proxy = new Ext.data.HttpProxy( { url : url } );
 		this.store.reload();
-	},
-	search : function(path, key)	{
-		var url = 'ashx/Search.ashx?path=' + path + '&key=' + key;
-		var conn = new Ext.data.Connection({
-			url : url
-		});
-	
-		this.store.proxy = new Ext.data.HttpProxy( conn );
-		this.store.proxy.on('loadexception', this.onLoadException, this );
-		this.store.reload();
-	},
-	onLoadException : function( o, options, response, e )	{
-		this.store.removeAll();
 	},
 	onRowdblclick : function( grid, rowIndex, e ) {
-		window.location='jeebook://www.jeebook.com/store/ashx/Get.ashx?path=' 
-						+ Ext.app.StoreTree.getObj().getCurrentPath() + '#' 
+		var url = window.location.href;
+		url = url.replace( window.location.protocol + '//', 'jeebook://' );
+		url = url.substr( 0, url.lastIndexOf( '/' ) + 1 ) + 'ashx/Get.ashx?path=' + Ext.app.StoreTree.getObj().getCurrentPath() 
 						+ grid.store.getAt(rowIndex).get('name') + grid.store.getAt(rowIndex).get('extension');
+		window.location = url;
 	},
 	formatIcon : function( extension )	{
 		if ( extension == '.jb' )
