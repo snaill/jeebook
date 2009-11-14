@@ -56,7 +56,7 @@ Ext.app.Actions = function() {
 					text: Ext.app.Resource.Toolbar.DownloadSite,
 					icon:'images/down.gif',
 					handler: function() {
-						window.location='http://www.jeebook.com';
+						window.location='http://www.jeebook.com/reader';
 					},
 					scope:this
 				});		
