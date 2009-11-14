@@ -80,8 +80,8 @@ Ext.extend(Ext.app.StoreGrid, Ext.grid.GridPanel, {
 	},
 	formatIcon : function( extension )	{
 		if ( extension == '.jb' )
-			return '<img src="" alt="Jeebook Document" />';
-		return '<img src="" alt="Unknown Document" />';
+			return '<img src="images/jb.png" alt="Jeebook Document" />';
+		return '<img src="images/unknown.png" alt="Unknown Document" />';
 	},
 	formatSize : function( size )	{
 		return Ext.util.Format.fileSize(size);
