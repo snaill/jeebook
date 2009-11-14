@@ -137,29 +137,5 @@ namespace Jeebook.FileServer
 
             return strPath + "/" + str[1];
          }
-
-        /// <summary>
-        /// 本地路径转换成URL相对路径
-        /// </summary>
-        /// <param name="imagesurl1"></param>
-        /// <returns></returns>
-        public static string LocalToUrl(string local)
-        {
-            //获取程序根目录
-            string tmpRootDir = System.Web.HttpContext.Current.Server.MapPath(System.Web.HttpContext.Current.Request.ApplicationPath.ToString());
-            //转换成相对路径
-            string url = local.Replace(tmpRootDir, ""); 
-            return url.Replace(@"\", @"/");
-        }
-        /// <summary>
-        /// 相对路径转换成服务器本地物理路径
-        /// </summary>
-        /// <param name="imagesurl1"></param>
-        /// <returns></returns>
-        public static string UrlTolocal(string url)
-        {
-            string tmpRootDir = System.Web.HttpContext.Current.Server.MapPath(System.Web.HttpContext.Current.Request.ApplicationPath.ToString());//获取程序根目录
-            return tmpRootDir + url.Replace(@"/", @"\"); //转换成绝对路径
-        }
     }
 }
