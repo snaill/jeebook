@@ -14,7 +14,7 @@ namespace Jeebook.Store
             string strPath = context.Request.QueryString["path"];
 
             //
-            FileServerBase fs = new FileServerBase(context.Server.MapPath("../data/"));
+            FileServerBase fs = new FileServerBase(context.Server.MapPath(".."));
             fs.OnCheckCacheFolder += OnCheckCacheFolder;
             string dirs = fs.Get(strPath);
 
@@ -26,7 +26,7 @@ namespace Jeebook.Store
             if (!System.IO.Directory.Exists(strDir))
             {
                 ICSharpCode.SharpZipLib.Zip.FastZip fz = new ICSharpCode.SharpZipLib.Zip.FastZip();
-                fz.ExtractZip(strSource, strDir, "*.*");
+                fz.ExtractZip(strSource, strDir, "");
             }
         }
 

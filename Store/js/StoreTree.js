@@ -25,7 +25,7 @@ Ext.app.StoreTree = function() {
        		clearOnLoad:false
        	}),
 		root 		: new Ext.tree.AsyncTreeNode({
-			id:'root',
+			id:'data',
 			text:'Store'
 		})
 	});
@@ -39,14 +39,13 @@ Ext.app.StoreTree = function() {
 		Ext.app.MainPanel.getObj().onNotify( event );
 	}, this );
 	
+	this.getSelectionModel().select(this.root);
 	this.root.expand();
 };
 
 Ext.extend(Ext.app.StoreTree, Ext.tree.TreePanel, {
 	getPath : function( node ) {
-		var p = node.getPath() + '/';
-		// delete /root
-		return p.substring( 5 );
+		return node.getPath() + '/';
 	},
 	getCurrentPath : function(){
 		var node = this.getSelectionModel().getSelectedNode();

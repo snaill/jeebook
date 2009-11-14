@@ -15,7 +15,7 @@ Ext.app.MainPanel = function() {
 	Ext.app.MainPanel.superclass.constructor.call(this, {
 		id 		  : 'MainPanel_Id',
 		region    : 'center',
-		margins   : '3 3 3 0', 
+		margins   : '3 0 0 0', 
 		layout    : 'border',
 		defaults  : {
 			autoScroll : true

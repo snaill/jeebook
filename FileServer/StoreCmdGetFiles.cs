@@ -14,7 +14,7 @@ namespace Jeebook.Store
             string strPath = context.Request.QueryString["path"];
 
             //
-            FileServerBase fs = new FileServerBase(context.Server.MapPath("../data/"));
+            FileServerBase fs = new FileServerBase(context.Server.MapPath(".."));
             string dirs = fs.GetFiles(strPath);
 
             context.Response.WriteFile(dirs);
