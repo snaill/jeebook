@@ -1,10 +1,11 @@
 ﻿/*
- * Jeebook store 1.0
- * Copyright(c) 2008, Jeebook.com
+ * Jeebook store 2.0
+ * Copyright(c) 2008-2009, Jeebook.com
  * snaill@jeebook.com
  * 
  * http://www.jeebook.com
  */
+
 Ext.BLANK_IMAGE_URL = 'ext-3.0.0/resources/images/default/s.gif';
 Ext.app.Resource = new Object();
 Ext.app.UserState = null;
