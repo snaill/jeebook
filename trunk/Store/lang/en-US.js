@@ -1,4 +1,12 @@
-﻿Ext.app.en_US = function() {
+﻿/*
+ * Jeebook store 2.0
+ * Copyright(c) 2008-2009, Jeebook.com
+ * snaill@jeebook.com
+ * 
+ * http://www.jeebook.com
+ */
+
+ Ext.app.en_US = function() {
 
 	this.Toolbar = {};
 	this.Toolbar.AddFolder = 'Add Folder';
