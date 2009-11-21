@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2009 (http://www.altova.com) by Snaill (EMBRACE) -->
+<xs:schema xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+	<xs:import namespace="http://www.w3.org/XML/1998/namespace"/>
+	<xs:import namespace="http://www.w3.org/1999/xlink"/>
+	<xs:simpleType name="text">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="请点击我"/>
+			<xs:enumeration value="这个是一个链接"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="title">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="图书标题"/>
+				<xs:enumeration value="漫画标题"/>
+				<xs:enumeration value="章标题"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="personname">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="othername"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="para">
+		<xs:complexType mixed="true">
+			<xs:all minOccurs="0">
+				<xs:element ref="link"/>
+				<xs:element ref="mediaobject"/>
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="othername">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="作者"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="mediaobject">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="imageobject" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="link">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="text">
+					<xs:attribute ref="xlink:href" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="info">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="title"/>
+				<xs:element ref="author"/>
+				<xs:element ref="bibliosource"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="imageobject">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="imagedata"/>
+			</xs:sequence>
+			<xs:attribute ref="xlink:href"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="imagedata">
+		<xs:complexType>
+			<xs:attribute name="fileref" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="images/01.jpg"/>
+						<xs:enumeration value="images/02.jpg"/>
+						<xs:enumeration value="images/03.jpg"/>
+						<xs:enumeration value="images/AngrySmile.png"/>
+						<xs:enumeration value="images/BrokenHeart.png"/>
+						<xs:enumeration value="images/ConfusedSmile.png"/>
+						<xs:enumeration value="images/js.jpg"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="chapter">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="title"/>
+				<xs:choice>
+					<xs:element ref="mediaobject"/>
+					<xs:element ref="para" maxOccurs="unbounded"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="version" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:enumeration value="5.0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="book">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="info"/>
+				<xs:choice>
+					<xs:element ref="chapter" maxOccurs="unbounded"/>
+					<xs:element ref="mediaobject"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="version" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:enumeration value="5.0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="bibliosource">
+		<xs:simpleType>
+			<xs:restriction base="xs:anyURI">
+				<xs:enumeration value="http://jeebook.com/blog/?p=513"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="author">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="personname"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
