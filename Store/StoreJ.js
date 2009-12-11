@@ -1,6 +1,8 @@
 $(document).ready(function(){
     
-    $("#test").html("<a href=''>aaa</a>");
+    $("#navbar").pathnavbar({
+        path : '/aa/bb'
+        });
     
     setTimeout(function(){
         $('#loading').remove();
