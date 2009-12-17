@@ -9,7 +9,7 @@
  /*
 	/jeebook/trunk/Store/libs/jQuery.PathNavbar
 	minCount : 3
-	<ul>
+	<ul class="pnb-nav-ul">
 		<li>
 			<span> > </span>
 			<span>Store</span>
@@ -42,7 +42,7 @@
 				if ( s.length > cnt )
 					index = s.length - cnt;
 
-				html.append('<ul>');	
+				html.append('<ul class="pnb-nav-ul">');	
                 for (var i = index; i < s.length; i ++ )
                 {
 					html.append('<li><span class="drop">');
@@ -81,9 +81,11 @@
                 alert("this");
             });
 			
-            $(this).find('ul li span[class="drop"]').click(function(){
-                alert(">");
-            });
+            $(this).find('ul li span[class="drop"]').hover(function(){
+				$(this).parent().find('ul:first').css({visibility: "visible",display: "none"}).show(400);
+            }, function(){
+				$(this).parent().find('ul:first').css({visibility: "hidden"});
+			});
 			            
 			$(this).find('ul li span[class!="drop"]').click(function(){
 				$(this).parent().nextAll().remove();
