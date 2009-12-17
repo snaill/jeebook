@@ -1,11 +1,71 @@
 /*
- * Jeebook store 1.0
- * Copyright(c) 2008, Jeebook.com
+ * jQuery.PathNavbar 1.0
+ * Copyright(c) 2009, Jeebook.com
  * snaill@jeebook.com
  * 
  * http://www.jeebook.com
  */
 
+ /*
+  */
+
+.pnb-nav-ul, .pnb-nav-ul ul{
+margin:0;
+padding:0;
+list-style-type:none;
+list-style-position:outside;
+position:relative;
+line-height:1.5em; 
+}
+
+.pnb-nav-ul li{
+display:block;
+padding:0px 5px;
+border:1px solid #333;
+color:#fff;
+text-decoration:none;
+background-color:#333;
+}
+
+.pnb-nav-ul li:hover{
+background-color:#fff;
+color:#333;
+}
+
+.pnb-nav-ul li{
+float:left;
+position:relative;
+}
+
+.pnb-nav-ul ul {
+position:absolute;
+display:none;
+width:12em;
+top:1.5em;
+}
+
+.pnb-nav-ul li ul a{
+width:12em;
+height:auto;
+float:left;
+}
+
+.pnb-nav-ul ul ul{
+top:auto;
+}	
+
+.pnb-nav-ul li ul ul {
+left:12em;
+margin:0px 0 0 10px;
+}
+
+.pnb-nav-ul li:hover ul ul, .pnb-nav-ul li:hover ul ul ul, .pnb-nav-ul li:hover ul ul ul ul{
+display:none;
+}
+.pnb-nav-ul li:hover ul, .pnb-nav-ul li li:hover ul, .pnb-nav-ul li li li:hover ul, .pnb-nav-ul li li li li:hover ul{
+display:block;
+}
+  
 /*
  * Hilight component styles
  */ 
