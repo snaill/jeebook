@@ -45,7 +45,7 @@
  * 
  */ 
 #content {
-	width:650px;
+	width:600px;
 	margin:0 auto;
 }
 
@@ -56,13 +56,42 @@
 
 #adbox {
 	height:80px;
-	margin-left:182px;
-	padding-top:10px
+	margin-left:132px;
+}
+
+#cpanel {
+	background: #414141;
+	height:30px;
 }
 
 #toolbox {
 	text-align:right;
 }
+
+/*
+ * Tooltip
+ */ 
+/* override the arrow image of the tooltip */ 
+#toolboxtip {
+	display:none;
+	background:transparent url(images/black_arrow.png);
+	font-size:12px;
+	height:70px;
+	width:160px;
+	padding:25px;
+	color:#fff;	
+}
+
+#toolboxtip.bottom { 
+    background:url(images/black_arrow_bottom.png);     
+    padding-top:40px; 
+    height:55px; 
+} 
+ 
+#toolboxtip.bottom { 
+    background:url(images/black_arrow_bottom.png); 
+}
+
 /*
  * Hilight component styles
  */ 

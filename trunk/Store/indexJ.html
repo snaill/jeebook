@@ -12,9 +12,10 @@
     <div class="loading-indicator"><img src="images/loading.gif" width="32" height="32" style="margin-right:8px;float:left;vertical-align:top;"/>Jeebook Store<br /><span id="loading-msg">Loading...</span></div>
 </div>
 
-	<!-- js -->
+	<!-- js 
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js"></script>
-	<script type="text/javascript" src="http://cdn.jquerytools.org/1.1.2/tiny/jquery.tools.min.js"></script>
+	<script type="text/javascript" src="http://cdn.jquerytools.org/1.1.2/tiny/jquery.tools.min.js"></script>-->
+	<script src="http://cdn.jquerytools.org/1.1.2/full/jquery.tools.min.js"></script> 
 	<script type="text/javascript" src="libs/ddsmoothmenu/ddsmoothmenu.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
@@ -27,7 +28,32 @@
 				contentsource: "markup" //"markup" or ["container_id", "path_to_menu_file"]
 			});			
 
-			
+			// initialize tooltip 
+			$("#toolbox input[title]").tooltip({ 
+     
+				// use single tooltip element for all tips 
+				tip: '#toolboxtip',  
+				 
+				// tweak the position 
+				offset: [10, 2], 
+				 
+				// use "slide" effect 
+				effect: 'slide' 
+				 
+			// add dynamic plugin  
+			}).dynamic( { 
+			 
+				// customized configuration on bottom edge 
+				bottom: { 
+				 
+					// slide downwards 
+					direction: 'down', 
+					 
+					// bounce back when closed 
+					bounce: true 
+				} 
+			}); 
+	
 			setTimeout(function(){
 				$('#loading').remove();
 				$('#loading-mask').fadeOut({remove:true});
@@ -52,7 +78,7 @@
 			</div>
 		</div>
 		<div id="msgbar"></div>
-		<div id="cpanel" class="ui-widget">
+		<div id="cpanel">
 			<div id="navbar"> 
 				<ul>
 					<li><a href="http://www.dynamicdrive.com">Item 1</a></li>
@@ -69,9 +95,12 @@
 					</li>
 				</ul>
 			</div>
+							
+			<!-- the tooltip --> 
+			<div id="toolboxtip">&nbsp;</div> 
 			<div id="toolbox">
-				<input type="button" value="+"></input>
-				<input type="button" value="^"></input>
+				<input type="button" value="+" title="A must have tool for designing better layouts and more intuitive user-interfaces."></input>
+				<input type="button" value="^" title="A must have tool for designing better layouts and more intuitive user-interfaces."></input>
 			</div>
 		</div>
 		<div id="bookpanel"></div>
