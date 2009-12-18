@@ -4,8 +4,9 @@
 	<title>Jeebook Store</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" type="text/css" href="StoreJ.css"/>
+	<link rel="stylesheet" type="text/css" href="libs/ddsmoothmenu/ddsmoothmenu.css"/>
 </head>
-<body style="font: 62.5% 'Trebuchet MS', sans-serif">
+<body>
 <div id="loading-mask" style=""></div>
 <div id="loading">
     <div class="loading-indicator"><img src="images/loading.gif" width="32" height="32" style="margin-right:8px;float:left;vertical-align:top;"/>Jeebook Store<br /><span id="loading-msg">Loading...</span></div>
@@ -13,41 +14,69 @@
 
 	<!-- js -->
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js"></script>
-	<script type="text/javascript" src="jQuery.pathnavbar.js"></script>
-	<script type="text/javascript" src="StoreJ.js"></script>
+	<script type="text/javascript" src="http://cdn.jquerytools.org/1.1.2/tiny/jquery.tools.min.js"></script>
+	<script type="text/javascript" src="libs/ddsmoothmenu/ddsmoothmenu.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			// navbar
+			ddsmoothmenu.init({
+				mainmenuid: "navbar", //menu DIV id
+				orientation: 'h', //Horizontal or vertical menu: Set to "h" or "v"
+				classname: 'ddsmoothmenu', //class added to menu's outer DIV
+				//customtheme: ["#1c5a80", "#18374a"],
+				contentsource: "markup" //"markup" or ["container_id", "path_to_menu_file"]
+			});			
+
+			
+			setTimeout(function(){
+				$('#loading').remove();
+				$('#loading-mask').fadeOut({remove:true});
+			}, 250);
+		});
+	</script>
 	
-	<table border="0" style="margin:0 auto">
-		<tr>
-			<td style="background-image:url(images/logo.png);height:80px">
-				<div id='adbox' style="margin-left:200px;margin-top:10px">
-					<!-- google ad 468x60, Store 08-12-17 -->
-					<script type="text/javascript"><!--
-					google_ad_client = "pub-7330597899926046";
-					google_ad_slot = "6582247482";
-					google_ad_width = 468;
-					google_ad_height = 60;
-					//-->
-					</script>
-					<script type="text/javascript"
-					src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-					</script>
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<div class="ui-widget">
-					<div id="navbar" class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
-						<!-- <p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>
-						<strong>Hey!</strong> Sample ui-state-highlight style.</p> -->
-					</div>
-				</div>	
-			</td>
-		</tr>
-		<tr>
-			<td id="test"></td>
-		</tr>
-	</table>
+	<div id="content">
+		<div id="header">
+			<div id="adbox">
+				<!-- google ad 468x60, Store 08-12-17 -->
+				<script type="text/javascript"><!--
+				google_ad_client = "pub-7330597899926046";
+				google_ad_slot = "6582247482";
+				google_ad_width = 468;
+				google_ad_height = 60;
+				//-->
+				</script>
+				<script type="text/javascript"
+				src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+				</script>
+			</div>
+		</div>
+		<div id="msgbar"></div>
+		<div id="cpanel" class="ui-widget">
+			<div id="navbar"> 
+				<ul>
+					<li><a href="http://www.dynamicdrive.com">Item 1</a></li>
+					<li><a href="#">Folder 0</a>
+						<ul>
+							<li><a href="#">Sub Item 1.1</a></li>
+							<li><a href="#">Sub Item 1.2</a></li>
+							<li><a href="#">Sub Item 1.3</a></li>
+							<li><a href="#">Sub Item 1.4</a></li>
+							<li><a href="#">Sub Item 1.2</a></li>
+							<li><a href="#">Sub Item 1.3</a></li>
+							<li><a href="#">Sub Item 1.4</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div id="toolbox">
+				<input type="button" value="+"></input>
+				<input type="button" value="^"></input>
+			</div>
+		</div>
+		<div id="bookpanel"></div>
+		<div id="footer"></div>
+	</div>
 
 	<!-- google analytics -->
 <script type="text/javascript">
