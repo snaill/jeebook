@@ -50,7 +50,7 @@
 }
 
 #header {
-	background-image:url(images/logo.png);
+	background-image:url(../images/logo.png);
 	background-repeat: no-repeat;
 }
 
@@ -74,7 +74,7 @@
 /* override the arrow image of the tooltip */ 
 #toolboxtip {
 	display:none;
-	background:transparent url(images/black_arrow.png);
+	background:transparent url(../images/black_arrow.png);
 	font-size:12px;
 	height:70px;
 	width:160px;
@@ -83,14 +83,143 @@
 }
 
 #toolboxtip.bottom { 
-    background:url(images/black_arrow_bottom.png);     
+    background:url(../images/black_arrow_bottom.png);     
     padding-top:40px; 
     height:55px; 
 } 
  
 #toolboxtip.bottom { 
-    background:url(images/black_arrow_bottom.png); 
+    background:url(../images/black_arrow_bottom.png); 
 }
+
+/*
+ * Widget component styles
+ */ 
+button {
+	outline:1px outset #999;	
+	border:1px solid #fff;	
+	background-color:#222;
+	color:#fff;
+	height:24px;
+	-moz-border-radius:4px;
+	-moz-outline-radius:4px;
+	cursor:pointer;
+	font-size:11px;
+	margin-top:3px;
+}
+
+/*
+ * Dialog component styles
+ */ 
+.modal { 
+    background-color:#fff; 
+    display:none; 
+    width:350px; 
+    padding:15px; 
+    text-align:left; 
+    border:2px solid #333; 
+ 
+    opacity:0.8; 
+    -moz-border-radius:6px; 
+    -webkit-border-radius:6px; 
+    -moz-box-shadow: 0 0 50px #ccc; 
+    -webkit-box-shadow: 0 0 50px #ccc; 
+} 
+ 
+.modal h2 { 
+    background:url(../images/info.png) 0 50% no-repeat; 
+    margin:0px; 
+    padding:10px 0 10px 45px; 
+    border-bottom:1px solid #333; 
+    font-size:20px; 
+}
+
+/*
+ * BookPanel component styles
+ */
+/* root element for scrollable */
+.vertical {  
+	
+	/* required settings */
+	position:relative;
+	overflow:hidden;	
+
+	/* vertical scrollers have typically larger height than width */	
+	height: 665px;	 
+	width: 600px;
+	border-top:1px solid #ddd;	
+}
+
+/* root element for scrollable items */
+.items {	
+	position:absolute;
+	
+	/* this time we have very large space for height */	
+	height:20000em;	
+	margin: 0px;
+}
+
+/* single scrollable item */
+.items div {
+	border-bottom:1px solid #ddd;
+	margin:10px 0;
+	padding:15px;
+	font-size:12px;
+	height:180px;
+}
+
+/* elements inside single item */
+.items img {
+	float:left;
+	margin-right:20px;
+	height:180px;
+	width:240px;
+}
+
+.items h3 {
+	margin:0 0 5px 0;
+	font-size:16px;
+	color:#456;
+	font-weight:normal;
+}
+
+/* the action buttons above the scrollable */
+#actions {
+	width:700px;
+	margin:30px 0 10px 0;	
+}
+
+#actions a {
+	font-size:11px;		
+	cursor:pointer;
+	color:#666;
+}
+
+#actions a:hover {
+	text-decoration:underline;
+	color:#000;
+}
+
+.disabled {
+	visibility:hidden;		
+}
+
+.nextPage {
+	float:right;
+}	
+
+/* use a semi-transparent image for the overlay */ 
+#overlay { 
+    background-image:url(http://static.flowplayer.org/img/overlay/transparent.png); 
+    color:#efefef; 
+    height:450px; 
+} 
+ 
+/* container for external content. uses vertical scrollbar, if needed */ 
+div.contentWrap { 
+    height:441px; 
+    overflow-y:auto; 
+} 
 
 /*
  * Hilight component styles
