@@ -5,58 +5,20 @@
  * 
  * http://www.jeebook.com
  */
- 
- /*
-	/jeebook/trunk/Store/libs/jQuery.PathNavbar
-	size : 3
-	<ul class="pnb-nav-ul">
-		<li>
-			<span>Store</span>
-			<ul>
-				<li>jeebook</li>
-				<li>trunk</li>
-			</ul>
-		</li>
-		<li>
-			<span>libs</span>
-		</li>
-		<li>
-			<span>jQuery.PathNavbar</span>
-		</li>		
-	</ul>
-  */
-  
+
 ;(function($){
     $.fn.pathnavbar = function( options ) {
         var pnb = $.fn.pathnavbar,
-		path2html = function(p, cnt) {
-			if ( p.indexOf('/') == 0 )
-				p = p.substr(1);
-						
+		getItemsByPath = function(p) {
 			var s = p.split('/');
-			var html = new StringBuilder();
-			var index = 0;
-			if ( s.length > cnt )
-				index = s.length - cnt;
-
-			html.append('<ul>');	
-			for (var i = index; i < s.length; i ++ )
+			var items = [];
+			for (var i = 0, j = 0; i < s.length; i ++ )
 			{
-				html.append('<li><span style="padding-right: 23px">' + s[i]);
-				html.append('<img src="' + pnb.settings.rightIcon + '" class="' + pnb.settings.rightCss + '" style="border:0;" /></span>');					
-				if ( i == index )
-				{
-					html.append('<ul>');	
-					for ( var j = 0; j < index; j ++ )
-					{
-						html.append('<li><span>' + s[j] + '</span></li>');
-					}
-					html.append('</ul>');
-				}
-				html.append('</li>');
+				if ( s[i] == "" )
+					continue;
+				items[j++] = {name:s[i], isLeaf:false};
 			}
-			html.append('</ul>');
-			return html.toString();
+			return items;
 		},
 	    getPath = function(o) {
 		    var nodes = o.prevAll().find('span[class!="drop"]');
@@ -67,27 +29,72 @@
 		    }
 		    path.append(o.find('span[class!="drop"]').html() + '/');
 		    return path.toString();
-	    };
+	    },
+		rebuild = function(o, items) {
+			var html = new StringBuilder();
+			var index = 0;
+			
+			html.append('<ul class="jq-menu-topmenu">');	
+			if ( items.length > pnb.settings.size )
+			{
+				index = items.length - pnb.settings.size;
+				html.append('<li><span><img src="' + pnb.settings.baseIcon + '" />');	
+				html.append('<img src="' + pnb.settings.rightIcon + '" class="' + pnb.settings.rightCss + '"/>');
+				html.append('</span>');
+				html.append('<ul class="jq-menu-foldmenu">');	
+				for ( var j = 0; j < index; j ++ )
+				{
+					html.append('<li><span>' + items[j].name + '</span></li>');
+				}
+				html.append('</ul></li>');
+			}
+
+			for (var i = index; i < items.length; i ++ )
+			{
+				html.append('<li><span>' + items[i].name);
+				if ( !items[i].isLeaf )
+					html.append('<img src="' + pnb.settings.rightIcon + '" class="' + pnb.settings.rightCss + '"/>');		
+				html.append('</span>');
+				if ( items[i].subs != null )
+				{
+					html.append('<ul class="jq-menu-submenu">');
+					for ( var j = 0; j < items[i].subs.length; j ++ )
+					{
+						html.append('<li><span>' + items[i].subs[j].name + '</span></li>');
+					}
+					html.append('</ul>');
+				}
+				html.append('</li>');
+			}
+			html.append('</ul>');
+			o.html(html.toString());
+		};
 		
 		return this.each(function(){
 			pnb.settings = $.extend({}, pnb.defaults, options);
-			$(this).html(path2html(pnb.settings.path, pnb.settings.size));
 			
-			var $mainmenu = $(this).children('ul:eq(0)');
+			var items = getItemsByPath(pnb.settings.path);
+			rebuild($(this), items);
+			
+			var $mainmenu = $(this).children('ul[class="jq-menu-topmenu"]');
 			$mainmenu.parent().get(0).className = pnb.settings.classname;
 			var $headers=$mainmenu.find('ul').parent();
 			$headers.hover(
 				function(e){
-					$(this).children('span:eq(0)').addClass('selected');
-					$(this).find('span>img').attr('src', 'down.gif');			
-					$(this).find('span>img').attr('className', 'downarrowclass');		
+					$(this).children('span:eq(0)').addClass('jq-item-selected');
+					$(this).find('span>img:last()').attr({
+						src : pnb.settings.downIcon,
+						className : pnb.settings.downCss
+					});
 				},
 				function(e){
-					$(this).children('span:eq(0)').removeClass('selected');
-					$(this).find('span>img').attr('src', 'right.gif');
-					$(this).find('span>img').attr('className', 'rightarrowclass');		
+					$(this).children('span:eq(0)').removeClass('jq-item-selected');
+					$(this).find('span>img:last()').attr({
+						src : pnb.settings.rightIcon,
+						className : pnb.settings.rightCss
+					});
 				}
-			) 
+			)
 			
 			$headers.each(function(i){ //loop through each LI header
 				var $curobj=$(this).css({zIndex: 100-i}); //reference current LI header
@@ -138,11 +145,12 @@
     pnb.defaults = {
         path : '/',
 		size : 5,
-		classname : 'ddsmoothmenu',
+		classname : 'jq-menu',
 		downIcon : 'down.gif',
 		rightIcon : 'right.gif',
-		downCss : 'downarrowclass',
-		rightCss : 'rightarrowclass'		
+		baseIcon : 'base.gif',
+		downCss : 'jq-item-downarrow',
+		rightCss : 'jq-item-rightarrow'		
     };
     pnb.settings = {};
 })(jQuery);
