@@ -1,0 +1,81 @@
+/* common style */
+.jq-menu-show {
+	display: block !important;
+	visibility: visible !important; 
+}
+
+.jq-item-selected {
+	background: black !important; 
+	color: white;
+}	
+
+.jq-item-downarrow{
+	position: absolute;
+	top: 12px;
+	right: 5px;
+	border : 0;
+}
+
+.jq-item-rightarrow{
+	position: absolute;
+	top: 10px;
+	right: 7px;
+	border : 0;
+}
+
+/* container style */		
+.jq-menu{
+	font: bold 12px Verdana;
+	background: #414141; /*background of menu bar (default state)*/
+	width: 100%;
+}
+
+/* topmenu style */	
+.jq-menu-topmenu{
+	z-index:100;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+.jq-menu-topmenu > li {
+	position: relative;
+	display: inline;
+	float: left;
+}
+
+.jq-menu-topmenu > li > span{
+	display: block;
+	background: #414141; /*background of menu items (default state)*/
+	color: white;
+	padding: 8px 20px 8px 10px;
+	border-right: 1px solid #778;
+}
+
+/* submenu style */	
+.jq-menu-foldmenu, .jq-menu-submenu {
+	z-index:100;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	position: absolute;
+	left: 0;
+	display: none; /*collapse all sub menus to begin with*/
+	visibility: hidden;
+}
+
+.jq-menu-foldmenu > li > span, .jq-menu-submenu > li > span{
+	display: block;
+	width: 160px; /*width of sub menus*/
+	padding: 5px;
+	margin: 0;
+	border-top-width: 0;
+	border-bottom: 1px solid gray;
+	background: #414141; /* background of menu items (default state) */
+	color: white;
+}
+
+.jq-menu-foldmenu > li > span:hover, .jq-menu-submenu > li > span:hover{
+background: black; /*background of menu items during onmouseover (hover state)*/
+color: white;
+}
