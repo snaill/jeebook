@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using Jeebook.FileServer;
+using Jeebook.ROA;
 
 namespace Jeebook.Store.ROA
 {
@@ -13,21 +14,24 @@ namespace Jeebook.Store.ROA
         {
             string strPath = context.Request.QueryString["path"];
 
-            //
-            FileServerBase fs = new FileServerBase(context.Server.MapPath(".."));
-            fs.OnCheckCacheFolder += OnCheckCacheFolder;
-            string dirs = fs.Get(strPath);
+            try
+            {
+                if (context.Request.HttpMethod == "GET")
+                    do_Get(context, strPath);
+                else
+                    context.Response.StatusCode = HttpStatusCode.HTTP_501_NotImplemented;
 
-            context.Response.WriteFile(dirs);
+            }
+            catch (FileServerException)
+            {
+
+            }
         }
 
-        public void OnCheckCacheFolder(string strSource, string strDir, string strFn)
+        public void do_Get(HttpContext context, string strPath)
         {
-            if (!System.IO.Directory.Exists(strDir))
-            {
-                ICSharpCode.SharpZipLib.Zip.FastZip fz = new ICSharpCode.SharpZipLib.Zip.FastZip();
-                fz.ExtractZip(strSource, strDir, "");
-            }
+            //
+            context.Response.StatusCode = HttpStatusCode.HTTP_501_NotImplemented;
         }
 
         public bool IsReusable

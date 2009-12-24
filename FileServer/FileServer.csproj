@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="FileServerBase.cs" />
     <Compile Include="FileServerException.cs" />
+    <Compile Include="HttpStatusCode.cs" />
     <Compile Include="ja_albums.cs" />
     <Compile Include="Class.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
