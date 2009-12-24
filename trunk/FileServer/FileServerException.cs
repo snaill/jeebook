@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace JSuit
+namespace Jeebook.FileServer
 {
-    public class JException : Exception
+    public class FileServerException : Exception
     {
 
     }

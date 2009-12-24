@@ -15,8 +15,7 @@ namespace Jeebook.Store
 
             //
             FileServerBase fs = new FileServerBase(context.Server.MapPath(".."));
-            fs.OnCheckCacheFolder += OnCheckCacheFolder;
-            string dirs = fs.Get(strPath);
+            string dirs = fs.GetRealPath(strPath);
 
             context.Response.WriteFile(dirs);
         }
