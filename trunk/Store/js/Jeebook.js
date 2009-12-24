@@ -10,11 +10,11 @@
 	$.jeebook = {
 		getDirectories : function(path){
 			var o = {};
+			var url = 'category' + path;
 			$.ajax({
-				url 	: "ashx/GetDirectories.ashx",
+				url 	: url,
 				type	: "GET",
 				async	: false,
-				data 	: {path:path},
 				dataType : 'json',
 				success : function(data){
 					o = data;

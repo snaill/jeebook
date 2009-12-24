@@ -45,7 +45,10 @@ Ext.app.StoreTree = function() {
 
 Ext.extend(Ext.app.StoreTree, Ext.tree.TreePanel, {
 	getPath : function( node ) {
-		return node.getPath() + '/';
+		var s = node.getPath() + '/';
+		s = s.substr(1);
+		s = s.substr( s.indexOf('/') );
+		return s;
 	},
 	getCurrentPath : function(){
 		var node = this.getSelectionModel().getSelectedNode();
