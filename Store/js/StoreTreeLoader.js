@@ -24,16 +24,15 @@ Ext.app.StoreTreeLoader = Ext.extend( Ext.tree.TreeLoader, {
     },
     requestData : function(node, callback){
         if(this.fireEvent("beforeload", this, node, callback) !== false){
-			var url = 'ashx/GetDirectories.ashx';
 			var nodePath = Ext.app.StoreTree.getObj().getPath( node );
-            this.transId = Ext.Ajax.request({
+ 			var url = 'category' + nodePath;
+			this.transId = Ext.Ajax.request({
                 method:'GET',
                 url: url,
                 success: this.handleResponse,
                 failure: this.handleFailure,
                 scope: this,
-                argument: {callback: callback, node: node},
-                params: { path : nodePath }
+                argument: {callback: callback, node: node}
             });
         }else{
             // if the load is cancelled, make sure we notify
@@ -50,7 +49,8 @@ Ext.app.StoreTreeLoader = Ext.extend( Ext.tree.TreeLoader, {
     createNode : function( dir ){
 		return	new Ext.tree.AsyncTreeNode({
 			id : dir.name,
-			text : dir.name
+			text : dir.name,
+			leaf : dir.leaf
 		});
     },
 
@@ -58,9 +58,9 @@ Ext.app.StoreTreeLoader = Ext.extend( Ext.tree.TreeLoader, {
 		var o = Ext.decode( response.responseText );
         try {
 			node.beginUpdate();
-			for ( var i = 0; i < o.data.length; i ++ )
+			for ( var i = 0; i < o.length; i ++ )
 			{
-				var n = this.createNode( o.data[i] );
+				var n = this.createNode( o[i] );
 				if ( n )
 					node.appendChild(n);
 			}

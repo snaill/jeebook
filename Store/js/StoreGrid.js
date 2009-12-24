@@ -67,7 +67,9 @@ Ext.app.StoreGrid = function() {
 
 Ext.extend(Ext.app.StoreGrid, Ext.grid.GridPanel, {
 	load : function(path)	{
-		var url = 'ashx/GetFiles.ashx?path=' + encodeURIComponent(path);
+		var url = 'book' + encodeURIComponent(path);
+		alert(path);
+
 		this.store.proxy = new Ext.data.HttpProxy( { url : url } );
 		this.store.reload();
 	},
