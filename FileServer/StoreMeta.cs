@@ -1,0 +1,41 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Web;
+using Jeebook.FileServer;
+
+namespace Jeebook.Store.ROA
+{
+    class Meta : IHttpHandler
+    {
+        public void ProcessRequest(HttpContext context)
+        {
+            string strPath = context.Request.QueryString["path"];
+
+            //
+            FileServerBase fs = new FileServerBase(context.Server.MapPath(".."));
+            fs.OnCheckCacheFolder += OnCheckCacheFolder;
+            string dirs = fs.Get(strPath);
+
+            context.Response.WriteFile(dirs);
+        }
+
+        public void OnCheckCacheFolder(string strSource, string strDir, string strFn)
+        {
+            if (!System.IO.Directory.Exists(strDir))
+            {
+                ICSharpCode.SharpZipLib.Zip.FastZip fz = new ICSharpCode.SharpZipLib.Zip.FastZip();
+                fz.ExtractZip(strSource, strDir, "");
+            }
+        }
+
+        public bool IsReusable
+        {
+            get
+            {
+                return false;
+            }
+        }
+    }
+}
