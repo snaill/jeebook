@@ -2,9 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head profile="http://www.w3.org/2005/10/profile">
 	<title>Jeebook Store</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link rel="stylesheet" type="text/css" href="ext-3.0.0/resources/css/ext-all.css" />
-	<link rel="stylesheet" type="text/css" href="Store.css"/>
+	<link rel="stylesheet" type="text/css" href="css/Store.css"/>
 </head>
 <body>
 <div id="loading-mask" style=""></div>
@@ -13,38 +11,101 @@
 </div>
 
 	<!-- js -->
-	<script type="text/javascript" src="ext-3.0.0/adapter/ext/ext-base.js"></script>
- 	<script type="text/javascript" src="ext-3.0.0/ext-all.js"></script>
-	<script language="javascript" src="js/SessionProvider.js"></script>
-	<script type="text/javascript" src="js/FileUploadField.js"></script>
-	<script type="text/javascript" src="js/Store.js"></script>
-	<script type="text/javascript" src="js/Actions.js"></script>
-	<script type="text/javascript" src="js/MainPanel.js"></script>
-	<script type="text/javascript" src="js/StoreGrid.js"></script>
-	<script type="text/javascript" src="js/StoreTree.js"></script>
-	<script type="text/javascript" src="js/StoreTreeLoader.js"></script>	
-	<script type="text/javascript" src="js/AddFolderPanel.js"></script>
-	<script type="text/javascript" src="js/AddFilePanel.js"></script>	
-	<script type="text/javascript" src="js/ContentPanel.js"></script>	
-	<script type="text/javascript" src="js/Error.js"></script>	
-	<script type="text/javascript" src="js/Event.js"></script>	
-	<script type="text/javascript" src="lang/zh-CN.js"></script>	
-	<script type="text/javascript" src="lang/en-US.js"></script>	
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="js/Jeebook.js"></script>
+	<script type="text/javascript">
+		function getQueryString(name){
+			var url = document.location.href;
+			var rs = new RegExp("(^|)"+name+"=([^\&]*)(\&|$)","gi").exec(url), tmp;  
+			if (tmp=rs)
+				return tmp[2];
+			return "";  
+		}
+		
+		$(document).ready(function(){
+			// fill category
+			var url = './api/category/' + getQueryString('category');
+			$.ajax({
+				url 	: url,
+				type	: "GET",
+				async	: false,
+				dataType : 'json',
+				success : function(data){
+					if ( data.length == 0 )
+						return;
+					
+					url = './category/' + getQueryString('category');
+					var html = "";
+					for ( var i = 0; i < data.length; i ++ )
+					{
+						html += '<a href="' + url + data[i].name + '/" >' + data[i].name + '</a> ';
+					}
+					$('#category').html(html);
+				},
+				error	: function(xhr){
+					alert(url);
+				}
+			});
+			
+			// fill book
+			url = './api/book/' + getQueryString('category');
+			$.ajax({
+				url 	: url,
+				type	: "GET",
+				async	: false,
+				dataType : 'json',
+				success : function(data){
+					if ( data.length == 0 )
+						return;
+					
+					url = 'book/' + getQueryString('category');
+					var html = "<table>";
+					for ( var i = 0; i < data.length; i ++ )
+					{
+						html += '<tr><td>' + '<a href="' + url + data[i].name + data[i].extension + ',index.xml" >' + data[i].name + '</a></td>';
+						html += '<td>' + data[i].size + '</td></tr>';
+					}
+					html += '</table>'
+					$('#book').html(html);
+				},
+				error	: function(xhr){
+					alert(url);
+				}
+			});
+			
+			//
+			setTimeout(function(){
+				$('#loading').remove();
+				$('#loading-mask').fadeOut({remove:true});
+			}, 250);
+		});
+	</script>
 	
-<div id='adbox'>
-<script type="text/javascript"><!--
-google_ad_client = "pub-7330597899926046";
-/* 468x60, Store 08-12-17 */
-google_ad_slot = "6582247482";
-google_ad_width = 468;
-google_ad_height = 60;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
-</div>
+	<div id="content">
+		<div id="header">
+			<div id="adbox">
+				<!-- google ad 468x60, Store 08-12-17 -->
+				<script type="text/javascript"><!--
+				google_ad_client = "pub-7330597899926046";
+				google_ad_slot = "6582247482";
+				google_ad_width = 468;
+				google_ad_height = 60;
+				//-->
+				</script>
+				<script type="text/javascript"
+				src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+				</script>
+			</div>
+		</div>
+		<div id="category"></div>
+		<div id="book"></div>
+		<div id="footer">
+			<hr />
+			<center>&copy; 2009 Jeebook.com</center>
+		</div>
+	</div>
 
+	<!-- google analytics -->
 <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
