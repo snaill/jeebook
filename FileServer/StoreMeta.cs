@@ -8,38 +8,12 @@ using Jeebook.ROA;
 
 namespace Jeebook.Store.ROA
 {
-    class Meta : IHttpHandler
+    class Meta : BaseHandler
     {
-        public void ProcessRequest(HttpContext context)
-        {
-            string strPath = context.Request.QueryString["path"];
-
-            try
-            {
-                if (context.Request.HttpMethod == "GET")
-                    do_Get(context, strPath);
-                else
-                    context.Response.StatusCode = HttpStatusCode.HTTP_501_NotImplemented;
-
-            }
-            catch (FileServerException)
-            {
-
-            }
-        }
-
-        public void do_Get(HttpContext context, string strPath)
+        public override void do_Get(HttpContext context)
         {
             //
             context.Response.StatusCode = HttpStatusCode.HTTP_501_NotImplemented;
-        }
-
-        public bool IsReusable
-        {
-            get
-            {
-                return false;
-            }
         }
     }
 }
