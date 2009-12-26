@@ -15,7 +15,7 @@ namespace Jeebook.Store.ROA
             string strPath = context.Request.QueryString["path"];
 
             //
-            FileServerBase fs = new FileServerBase(context.Server.MapPath("../data/"));
+            FileServerBase fs = new FileServerBase(context.Server.MapPath("../data/"), VirtualPathMode.Zip);
             string dirs = fs.GetDirectories(strPath);
 
             context.Response.WriteFile(dirs);

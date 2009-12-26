@@ -15,7 +15,7 @@ namespace Jeebook.Alumb
             string strPath = context.Request.QueryString["path"];
 
             //
-            FileServerBase dc = new FileServerBase( context.Server.MapPath("../data/") );
+            FileServerBase dc = new FileServerBase(context.Server.MapPath("../data/"), VirtualPathMode.Zip);
             string dirs = dc.GetDirectories(strPath);
 
             context.Response.WriteFile(dirs);

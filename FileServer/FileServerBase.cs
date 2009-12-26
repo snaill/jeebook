@@ -33,11 +33,12 @@ namespace Jeebook.FileServer
     	string m_strBase = "";
         VirtualPathMode m_vMode = VirtualPathMode.Unknown;
 
-        public FileServerBase(string strBase)
+        public FileServerBase(string strBase, VirtualPathMode vMode)
         {
             m_strBase = strBase;
             if ( !m_strBase.EndsWith("\\") )
             	m_strBase += '\\';
+            m_vMode = vMode;
         }
 
         /// <summary>
@@ -131,21 +132,21 @@ namespace Jeebook.FileServer
         public string GetRealPath(string strDir)
         {
             if (strDir.IndexOf(PathDelimiter) < 0 || m_vMode == VirtualPathMode.Unknown)
-                return strDir;
+                return System.IO.Path.Combine(m_strBase, strDir);
 
             string[] str = (m_strBase + strDir).Split(PathDelimiter);
-            string strPath = str[0].Insert( str[0].LastIndexOf("/") + 1, DirPrefix );
+            string strPath = str[0].Insert( str[0].LastIndexOf("\\") + 1, DirPrefix );
             switch (m_vMode)
             {
                 case VirtualPathMode.Zip:
-                    OnCheckCacheFolder(str[0], strPath, str[1]);
+                    CheckCacheFolder(str[0], strPath, str[1]);
                     break;
             }
 
             return strPath + "/" + str[1];
          }
 
-         public void OnCheckCacheFolder(string strSource, string strDir, string strFn)
+         public void CheckCacheFolder(string strSource, string strDir, string strFn)
          {
             if (!System.IO.Directory.Exists(strDir))
             {
@@ -153,5 +154,15 @@ namespace Jeebook.FileServer
                 fz.ExtractZip(strSource, strDir, "");
             }
         }
+
+         public bool IsDirectory(string strPath)
+         {
+             return string.IsNullOrEmpty(strPath) || strPath[strPath.Length - 1] == '/';
+         }
+
+         public bool IsVirtualPath(string strPath)
+         {
+             return strPath.IndexOf(',') >= 0;
+         }
     }
 }
