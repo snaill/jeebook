@@ -3,6 +3,7 @@
 <head profile="http://www.w3.org/2005/10/profile">
 	<title>Jeebook Store</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" type="text/css" href="libs/jquery.pagination.css"/>
 	<link rel="stylesheet" type="text/css" href="css/Store.css"/>
 </head>
 <body>
@@ -13,6 +14,11 @@
 
 	<!-- js -->
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="libs/ajaxupload.js"></script>
+	<script type="text/javascript" src="libs/jquery.corner.js"></script>
+	<script type="text/javascript" src="libs/jquery.pagination.js"></script>
+	<script type="text/javascript" src="js/StringBuilder.js"></script>
+	<script type="text/javascript" src="js/jquery.msgbar.js"></script>
 	<script type="text/javascript" src="js/Store.js"></script>
 	
 	<div id="content">
@@ -32,20 +38,15 @@
 			</div>
 		</div>
 		<div id="msgbar"></div>
-		<div id="cpanel">
-			<div id="navbar" /> 
-							
-			<!-- the tooltip --> 
-			<div id="toolbox">
-				<button type="button" title="A must have tool for designing better layouts and more intuitive user-interfaces.">online</button>
-				<button type="button" class="modalInput" rel="#prompt" title="A must have tool for designing better layouts and more intuitive user-interfaces.">+</button>
-				<button type="button" title="A must have tool for designing better layouts and more intuitive user-interfaces.">^</button>
-			</div>
+		<div id="cmdbar">
+			<div id="uploadbtn"></div> 
+			<div id="pagination" class="pagination"></div> 	
 		</div>
+
 		<div id="bookpanel" />
 		<div id="footer">
 			<hr />
-			<center>&copy; 2009 <a href="http://jeebook.com">Jeebook.com</a></center>
+			<center>&copy; 2009 - 2010 <a href="http://jeebook.com">Jeebook.com</a></center>
 		</div>
 	</div>
 
