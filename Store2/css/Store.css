@@ -68,19 +68,6 @@
 	margin-left:132px;
 }
 
-/* 
-#msgbar {
-	background: yellow;
-	margin:0 auto 5px;
-	display:none;
-	width:70px;
-	height:15px;
-	line-height:15px;
-	text-align:center;
-	padding-bottom:5px;
-}
-*/
-
 /* command bar */
 #cmdbar {
 	display:table;

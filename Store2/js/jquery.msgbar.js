@@ -15,11 +15,7 @@
 			$(this).width(width < 200 ? 200 : width);
 			
 			$(this).css('background-color', settings.backColor );	
-//			$(this).css('width',  + 'px' );	
-//			$(this).css('margin', '0 auto');	
 			$(this).css('padding', '5px 0 5px');	
-//			$(this).css('height', '15px');
-//			$(this).css('line-height', '15px');
 			$(this).css('text-align', 'center');
 			$(this).css('margin', '5px auto 5px');	
 			$(this).css('font-weight', 'bold');	   			
