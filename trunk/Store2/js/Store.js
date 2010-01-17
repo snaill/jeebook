@@ -10,7 +10,7 @@ $(document).ready(function(){
 	
 	$("div#cmdbar").corner("tl bl 24px");
 	
-	$("div#msgbar").msgbar({msg:'test'});
+//	$("div#msgbar").msgbar({msg:'test'});
 
 /*	$("div#cmdbar").shadow({
            width:5, 
@@ -62,29 +62,85 @@ $(document).ready(function(){
 	});
 		
 	// init pagination
+	var error = function( xhr ) {
+		var msg = 'HTTP ' + xhr.status + ': ' + xhr.statusText;
+		$("div#msgbar").msgbar({msg:msg});
+	};
+	
+	$.jeebook.getCategorys('upload/', {
+		async	: true,
+		error 	: error,
+		success : function(data){
+			var names = [];
+			for ( var i = 0; i < data.length; i ++ )
+				names[i] = data[i].name;
+			
+			$("div#pagination").pagination(data.length, {
+				num_edge_entries: 2,
+				num_display_entries: 8,
+				items_per_page:1,
+				labels:names,
+				callback: function(page_index, jq){
+					$.jeebook.getBooks('upload/' + this.labels[page_index] + '/', {
+						async	: true,
+						error 	: error,
+						success : function(data){
+							alert(data.length);
+						}
+					});
+				}
+			});
+		}
+	});
+	/*
 	$.ajax({
 		url 	: 'api/category/upload/',
 		type	: "GET",
 		async	: true,
 		dataType : 'json',
 		success : function(data){
-			var labels = [];
+			var names = [];
 			for ( var i = 0; i < data.length; i ++ )
-				labels[i] = data[i].name;
+				names[i] = data[i].name;
 			
 			$("div#pagination").pagination(data.length, {
 				num_edge_entries: 2,
 				num_display_entries: 8,
+				items_per_page:1,
+				labels:names,
 				callback: function(page_index, jq){
-				},
-				items_per_page:1
+					$.ajax({
+						url 	: 'api/book/upload/' + this.labels[page_index] + '/',
+						type	: "GET",
+						async	: true,
+						dataType : 'json',
+						success : function(data){
+							var names = [];
+							for ( var i = 0; i < data.length; i ++ )
+								names[i] = data[i].name;
+							
+							$("div#pagination").pagination(data.length, {
+								num_edge_entries: 2,
+								num_display_entries: 8,
+								items_per_page:1,
+								labels:names,
+								callback: function(page_index, jq){
+									alert(this.labels[page_index]);
+								}
+							});
+						},
+						error	: function(xhr){
+							alert('error');
+						}
+					});
+				}
 			});
 		},
 		error	: function(xhr){
 			alert('error');
 		}
 	});
-			
+	*/		
 	// end init
 	setTimeout(function(){
 		$('#loading').remove();
