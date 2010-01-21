@@ -24,12 +24,11 @@ $(document).ready(function(){
 	
 	new AjaxUpload(button, {
 		action: 'api/book/upload/', 
-	//	name: 'myfile',
 		onSubmit : function(file, ext){
 			// Allow only images. You should add security check on the server-side.
 			if (!(ext && /^(bmp|png|jpeg|gif)$/.test(ext))){
 				// extension is not allowed
-				$('#example2 .text').text('Error: only images are allowed');
+				$("div#msgbar").msgbar({msg:'Error: only images are allowed'});
 				// cancel upload
 				return false;				
 			}	
@@ -71,6 +70,9 @@ $(document).ready(function(){
 		async	: true,
 		error 	: error,
 		success : function(data){
+			if ( data.length == 0 )
+				return;
+				
 			var names = [];
 			for ( var i = 0; i < data.length; i ++ )
 				names[i] = data[i].name;
@@ -81,7 +83,10 @@ $(document).ready(function(){
 				items_per_page:1,
 				labels:names,
 				callback: function(page_index, jq){
-					$.jeebook.getBooks('upload/' + this.labels[page_index] + '/', {
+					var url = 'upload/';
+					if ( this.labels[page_index] != null )
+						url += this.labels[page_index] + '/';
+					$.jeebook.getBooks(url, {
 						async	: true,
 						error 	: error,
 						success : function(data){

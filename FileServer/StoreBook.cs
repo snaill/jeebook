@@ -32,18 +32,73 @@ namespace Jeebook.Store.ROA
             }
         }
 
-        //public void do_Post(HttpContext context, string strPath)
-        //{
+        public override void do_Post(HttpContext context)
+        {
+            // 
+            string strPath = context.Server.MapPath("../data/upload/");
+            for (int i = 0; i < context.Request.Files.Count; i ++ )
+            {
+                string strFilename = strPath + FileName2Path(context.Request.Files[i].FileName);
+                string strDir = System.IO.Path.GetDirectoryName(strFilename);
+                System.IO.Directory.CreateDirectory(strDir);
+                context.Request.Files[0].SaveAs(strFilename);
+                FileServerBase.ResetDirectory(strDir);
+                FileServerBase.ResetDirectory(System.IO.Path.GetDirectoryName(strDir));
+            }
+        }
 
+        //public override void do_Put(HttpContext context, string strPath)
+        //{
         //}
 
-        //public void do_Put(HttpContext context, string strPath)
+        //public override void do_Delete(HttpContext context, string strPath)
         //{
         //}
 
-        //public void do_Delete(HttpContext context, string strPath)
-        //{
-        //}
+        public string FileName2Path( string strFilename )
+        {
+            if ( IsChineseLetter( strFilename, 0 ) )
+                return GetCharSpellCode( strFilename[0] ) + "/" + strFilename;
+
+            return strFilename[0].ToString().ToUpper()  + "/" + strFilename;
+        }
+
+        protected bool  IsChineseLetter(string input,int index)
+        {
+            int code = 0;
+            int chfrom = Convert.ToInt32("4e00", 16);    //范围（0x4e00～0x9fff）转换成int（chfrom～chend）
+            int chend = Convert.ToInt32("9fff", 16);
+            if (input != "")
+            {
+                code = Char.ConvertToUtf32(input, index);    //获得字符串input中指定索引index处字符unicode编码
+
+                if (code >= chfrom && code <= chend)
+                {
+                    return true;     //当code在中文范围内返回true
+                }
+                else
+                {
+                    return false ;    //当code不在中文范围内返回false
+                }
+            }
+            return false;
+        }
+
+        private static char GetCharSpellCode(char c)
+        {
+            byte[] data = Encoding.GetEncoding("gb2312").GetBytes(c.ToString());
+            ushort code = (ushort)((data[0] << 8) + data[1]);
+            ushort[] areaCode = {45217,45253,45761,46318,46826,47010,47297,47614,48119,48119,49062,49324,
+                    49896,50371,50614,50622,50906,51387,51446,52218,52698,52698,52698,52980,53689,54481, 55290};
+
+            for (int i = 0; i < 26; i++)
+            {
+                if (code>=areaCode[i] && code < (ushort)(areaCode[i + 1] - 1))
+                    return (char)('A' + i);
+            }
+
+            return c;
+        }
 
         public bool Download(HttpRequest _Request, HttpResponse _Response, string _fileName)
         {
