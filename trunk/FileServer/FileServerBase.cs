@@ -144,7 +144,15 @@ namespace Jeebook.FileServer
             }
 
             return strPath + "/" + str[1];
-         }
+        }
+
+        public static void ResetDirectory(string strDir)
+        {
+            if (!(strDir.EndsWith("/") || strDir.EndsWith("\\")))
+                strDir += "\\";
+            System.IO.File.Delete(strDir + DirCacheName);
+            System.IO.File.Delete(strDir + FileCacheName);
+        }
 
          public void CheckCacheFolder(string strSource, string strDir, string strFn)
          {
