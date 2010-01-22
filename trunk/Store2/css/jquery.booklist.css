@@ -1,0 +1,42 @@
+.booklist span {
+	border-bottom: 1px solid #95bce2;
+	margin-left: 24px;
+	padding : 0 5px 0 5px;
+	font:bold 50px Arial;
+	width:60px;
+	text-align:center;
+}
+
+.booklist table {
+	border-collapse: collapse;
+	margin: 0px auto 24px;
+	width : 92%;
+}
+ 
+.booklist th {
+	background: #3e83c9;
+	color: #fff;
+	font-weight: bold;
+	padding: 2px 11px;
+	text-align: left;
+	border-right: 1px solid #fff;
+	line-height: 1.2;
+}
+ 
+.booklist td {
+	padding: 6px 11px;
+	border-bottom: 1px solid #95bce2;
+	vertical-align: top;
+}
+ 
+.booklist td * {
+	padding: 6px 11px;
+}
+
+.booklist tr.alt td {
+	background:#ecf6fc;
+}
+
+.booklist tr.over td {
+	background:#bcd4ec;
+}

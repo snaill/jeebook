@@ -10,8 +10,6 @@ $(document).ready(function(){
 	
 	$("div#cmdbar").corner("tl bl 24px");
 	
-//	$("div#msgbar").msgbar({msg:'test'});
-
 /*	$("div#cmdbar").shadow({
            width:5, 
            startOpacity:60, 
@@ -84,13 +82,22 @@ $(document).ready(function(){
 				labels:names,
 				callback: function(page_index, jq){
 					var url = 'upload/';
-					if ( this.labels[page_index] != null )
-						url += this.labels[page_index] + '/';
+					var title = this.labels[page_index];
+					if ( title != null )
+						url += title + '/';
+
 					$.jeebook.getBooks(url, {
 						async	: true,
 						error 	: error,
 						success : function(data){
-							alert(data.length);
+							$("div#booklist").booklist({
+								title: title,
+								cols : [
+									{ name : 'name', value : 'name' },
+									{ name : 'size', value : 'size' },
+									{ name : 'time', value : 'time' }],
+								records : data		
+							});
 						}
 					});
 				}
