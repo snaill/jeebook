@@ -108,7 +108,7 @@ namespace Jeebook.Toy
 		
 		void EditorMenuItemClick(object sender, EventArgs e)
 		{
-			EditorForm form = new EditorForm();
+            EditorForm form = new EditorForm(((Task)TaskListView.SelectedItems[0].Tag).JBPath );
 			form.Show();
 		}
 
