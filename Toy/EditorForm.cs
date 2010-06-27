@@ -18,9 +18,9 @@ namespace Jeebook.Toy
 	/// </summary>
 	public partial class EditorForm : Form
 	{
-		Book CurrentBook = null;
+        ICSharpCode.SharpZipLib.Zip.ZipFile _zf = null;
 		
-		public EditorForm()
+		public EditorForm(string fn)
 		{
 			//
 			// The InitializeComponent() call is required for Windows Forms designer support.
@@ -30,9 +30,26 @@ namespace Jeebook.Toy
 			//
 			// TODO: Add constructor code after the InitializeComponent() call.
 			//
+            _zf = new ICSharpCode.SharpZipLib.Zip.ZipFile(fn);
 
+            TreeNode tn = ContentTreeView.Nodes.Add( System.IO.Path.GetFileName( fn ) );
+            foreach (ICSharpCode.SharpZipLib.Zip.ZipEntry entry in _zf )
+            {
+                AddTreeNode( tn, entry.Name );
+            }
 		}
-		
+
+        void AddTreeNode(TreeNode tn, string path)
+        {
+            string[] dirs = path.Split('/');
+            foreach (string dir in dirs)
+            {
+                TreeNode[] tns = tn.Nodes.Find(dir, false);
+                tn = (null != tns) ? tn.Nodes.Add(dir) : tns[0];
+            }
+            tn.Tag = path;
+        }
+
 		void OpenButtonClick(object sender, EventArgs e)
 		{
             //CurrentBook = Book.Create(UriTextBox.Text);
